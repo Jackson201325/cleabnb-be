@@ -10,9 +10,7 @@ import Heading from '../Heading'
 import Input from '../inputs/Input'
 import Button from '../Button'
 
-type Props = {}
-
-const Register: React.FC<Props> = (props: Props) => {
+const Register = () => {
   const registerModal = useRegisterModal()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -84,7 +82,10 @@ const Register: React.FC<Props> = (props: Props) => {
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex flex-row items-center gap-2 justify-center">
           <div>Already have an account?</div>
-          <div onClick={registerModal.close} className="text-neutral-800 cursor-pointer hover:underline"></div>
+          <div
+            onClick={registerModal.close}
+            className="text-neutral-800 cursor-pointer hover:underline"
+          ></div>
         </div>
       </div>
     </div>
