@@ -13,13 +13,15 @@ const Logo = (props: Props) => {
   const router = useRouter()
 
   return (
-      <Image
-        alt="logo"
-        className="hidden md:block cursor-pointer"
-        height="100"
-        width="100"
-        src="/images/airbnb.png"
-      />
+    // <div>
+    <Image
+      alt="logo"
+      className="hidden md:block cursor-pointer mr-16"
+      height="43"
+      width="100"
+      src="/images/airbnb.png"
+    />
+    // </div>
   )
 }
 
