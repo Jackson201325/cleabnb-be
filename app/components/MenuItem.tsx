@@ -4,7 +4,7 @@ type Props = {
   onClick: () => void
   label: string
 }
-const MenuItem: NextPage<Props> = ({ onClick, label}) => {
+const MenuItem: NextPage<Props> = ({ onClick, label }) => {
   return (
     <div
       onClick={onClick}
