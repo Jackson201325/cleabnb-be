@@ -6,9 +6,9 @@ import Button from '../Button'
 
 type Props = {
   actionLabel?: string
-  body?: string
+  body?: React.ReactNode
   disabled?: boolean
-  footer?: string
+  footer?: React.ReactNode
   isOpen?: boolean
   onClose?: () => void
   onSubmit?: () => void
@@ -108,6 +108,7 @@ const Modal: React.FC<Props> = ({
                   disabled={disabled}
                 />
               </div>
+              {footer}
             </div>
           </div>
         </div>
