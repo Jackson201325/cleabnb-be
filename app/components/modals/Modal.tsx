@@ -17,7 +17,7 @@ type Props = {
   title?: string
 }
 
-const Login: React.FC<Props> = ({
+const Modal: React.FC<Props> = ({
   actionLabel,
   body,
   disabled,
@@ -116,4 +116,4 @@ const Login: React.FC<Props> = ({
   )
 }
 
-export default Login
+export default Modal
