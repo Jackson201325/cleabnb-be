@@ -4,16 +4,11 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
-import React from 'react'
-
-type Props = {}
-
-const Logo = (props: Props) => {
+const Logo = () => {
   // We can only use useRouter in the client side
   const router = useRouter()
 
   return (
-    // <div>
     <Image
       alt="logo"
       className="hidden md:block cursor-pointer mr-16"
@@ -21,7 +16,6 @@ const Logo = (props: Props) => {
       width="100"
       src="/images/airbnb.png"
     />
-    // </div>
   )
 }
 

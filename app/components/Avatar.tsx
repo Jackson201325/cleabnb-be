@@ -1,8 +1,6 @@
 import Image from 'next/image'
 
-type Props = {}
-
-const Avatar = (props: Props) => {
+const Avatar = () => {
   return (
     <Image
       className="rounded-full"

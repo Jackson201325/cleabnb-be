@@ -1,6 +1,7 @@
 // We have to add this because of the onClick
 'use client'
 
+import useLoginModal from '@/app/hooks/useLoginModal'
 import useRegisterModal from '@/app/hooks/useRegisterModal'
 import { useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
@@ -11,6 +12,7 @@ const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleOpen = () => setIsOpen(!isOpen)
   const registerModal = useRegisterModal()
+  const loginModal = useLoginModal()
 
   return (
     <div className="relative">
@@ -36,7 +38,7 @@ const UserMenu = () => {
       {isOpen && (
         <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
-            <MenuItem onClick={() => console.log('log')} label="Login" />
+            <MenuItem onClick={loginModal.open} label="Login" />
             <MenuItem onClick={registerModal.open} label="Register" />
           </div>
         </div>

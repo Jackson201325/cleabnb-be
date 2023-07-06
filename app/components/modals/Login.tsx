@@ -11,9 +11,9 @@ import Heading from '../Heading'
 import Input from '../inputs/Input'
 import Modal from './Modal'
 
-const Register = () => {
-  const registerModal = useRegisterModal()
+const Login = () => {
   const loginModal = useLoginModal()
+  const registerModal = useRegisterModal()
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -21,12 +21,12 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
-    defaultValues: { name: '', email: '', password: '' },
+    defaultValues: { email: '', password: '' },
   })
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true)
-    const url = 'localhost:3000/user/auth/register'
+    const url = 'localhost:3000/user/auth/login'
     const res = await fetch(url, { method: 'POST' })
 
     if (res.ok) {
@@ -36,25 +36,12 @@ const Register = () => {
     setIsLoading(false)
   }
 
-  const handleAccountClick = () => {
-    registerModal.close
-    loginModal.open
-  }
-
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="Welcome to Airbnb" subtitle="Create an account" />
+      <Heading title="Welcome to Airbnb" subtitle="Login to an account" />
       <Input
         id="email"
         label="Email"
-        disabled={isLoading}
-        errors={errors}
-        register={register}
-        required
-      />
-      <Input
-        id="name"
-        label="Name"
         disabled={isLoading}
         errors={errors}
         register={register}
@@ -90,7 +77,7 @@ const Register = () => {
         <div className="flex flex-row items-center gap-2 justify-center">
           <div>Already have an account?</div>
           <div
-            onClick={handleAccountClick}
+            onClick={loginModal.close}
             className="text-neutral-800 cursor-pointer hover:underline"
           ></div>
         </div>
@@ -104,12 +91,12 @@ const Register = () => {
       body={bodyContent}
       disabled={isLoading}
       footer={footerContent}
-      isOpen={registerModal.isOpen}
-      onClose={registerModal.close}
+      isOpen={loginModal.isOpen}
+      onClose={loginModal.close}
       onSubmit={handleSubmit(onSubmit)}
-      title="Register"
+      title="Login"
     />
   )
 }
 
-export default Register
+export default Login
