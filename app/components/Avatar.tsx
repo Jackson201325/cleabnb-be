@@ -1,15 +1,13 @@
 import Image from 'next/image'
 
-type Props = {}
-
-const Avatar = (props: Props) => {
+const Avatar = () => {
   return (
     <Image
       className="rounded-full"
       height="30"
       width="30"
       alt="avatar"
-      src="/images/avatar.jpg"
+      src="/images/avatar.png"
     />
   )
 }
