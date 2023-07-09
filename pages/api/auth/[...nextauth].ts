@@ -13,10 +13,12 @@ export const authOptions: AuthOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
+      allowDangerousEmailAccountLinking: true
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      allowDangerousEmailAccountLinking: true
     }),
     CredentialsProvider({
       name: 'credentials',
@@ -25,9 +27,8 @@ export const authOptions: AuthOptions = {
         password: { label: 'password', type: 'password' },
       },
       async authorize(credentials) {
-        console.log('credentials', credentials)
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Invalid Credential')
+          throw new Error('Missing fields')
         }
 
         const user = await prisma.user.findUnique({
@@ -36,16 +37,16 @@ export const authOptions: AuthOptions = {
           },
         })
 
-        if (!user) throw new Error('Invalid credentials')
+        if (!user) throw new Error('Account not found')
 
-        if (!user.hashedPassword) throw new Error('Invalid credentials')
+        if (!user.hashedPassword) throw new Error('Internal Error')
 
         const isCorrectPassword = await bcrypt.compare(
-          credentials.email,
+          credentials.password,
           user.hashedPassword,
         )
 
-        if (!isCorrectPassword) throw new Error('Invalid Credentials')
+        if (!isCorrectPassword) throw new Error('Incorrect password')
 
         return user
       },

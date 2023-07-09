@@ -26,6 +26,7 @@ model User {
   reservations Reservation[]
 }
 
+// TODO fix the expired token names
 model Account {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @db.ObjectId
