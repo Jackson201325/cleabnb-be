@@ -1,9 +1,11 @@
 import { Nunito } from 'next/font/google'
 
 import Register from './components/modals/Register'
-import NavBar from './components/navbar/Navbar'
+import { NavBar } from './components/navbar/Navbar'
 import './globals.css'
 import ToasterProvider from './components/providers/ToasterProvider'
+import Login from './components/modals/Login'
+import { getCurrentUser } from './actions/getCurrentUser'
 
 const font = Nunito({ subsets: ['latin'] })
 
@@ -12,17 +14,20 @@ export const metadata = {
   description: 'Clearbnb front end',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const currentUser = await getCurrentUser()
+
   return (
     <html lang="en">
       <body className={font.className}>
         <ToasterProvider />
+        <Login />
         <Register />
-        <NavBar />
+        <NavBar currentUser={currentUser} />
         {children}
       </body>
     </html>
