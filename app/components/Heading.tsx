@@ -4,6 +4,7 @@ type Props = {
   center?: boolean
 }
 
+
 const Heading = ({ title, subtitle, center }: Props) => {
   return (
     <div className={center ? 'text-center' : 'text-start'}>
