@@ -1,14 +1,18 @@
 'use client'
 
 import useRegisterModal from '@/app/hooks/useRegisterModal'
+
+import axios from 'axios'
 import { useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
-import Modal from './Modal'
+
+import Button from '../Button'
 import Heading from '../Heading'
 import Input from '../inputs/Input'
-import Button from '../Button'
+import Modal from './Modal'
 
 const Register = () => {
   const registerModal = useRegisterModal()
@@ -24,14 +28,18 @@ const Register = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true)
-    const url = 'localhost:3000/user/auth/register'
-    const res = await fetch(url, { method: 'POST' })
-
-    if (res.ok) {
-      console.log(res.json())
-    }
-
-    setIsLoading(false)
+    axios
+      .post('/api/register', data)
+      .then((response) => {
+        console.log(response.data)
+        registerModal.close()
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   const bodyContent = (
@@ -40,6 +48,7 @@ const Register = () => {
       <Input
         id="email"
         label="Email"
+        type="email"
         disabled={isLoading}
         errors={errors}
         register={register}
@@ -48,6 +57,7 @@ const Register = () => {
       <Input
         id="name"
         label="Name"
+        type="text"
         disabled={isLoading}
         errors={errors}
         register={register}
@@ -56,6 +66,7 @@ const Register = () => {
       <Input
         id="password"
         label="Password"
+        type="password"
         disabled={isLoading}
         errors={errors}
         register={register}
