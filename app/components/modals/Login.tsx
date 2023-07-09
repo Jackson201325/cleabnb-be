@@ -43,7 +43,6 @@ const Login = () => {
       }
 
       if(callback?.error) {
-        console.log(callback.error)
         toast.error('Invalid credentials')
       }
     })
