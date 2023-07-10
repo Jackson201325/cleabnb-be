@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = "mongodb+srv://jacksonh201325:jacksonh201325@cluster0.zryv6fp.mongodb.net/test"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -33,13 +33,13 @@ model Account {
   type String
   provider String
   providerAccountId String
-  refreshToken String?
-  accessToken String?
-  expiresAt DateTime?
-  tokenType String?
+  refresh_token String?
+  access_token String?
+  expires_at DateTime?
+  token_type String?
   scope String?
-  idToken String? @db.String
-  sessionState String?
+  id_token String? @db.String
+  session_state String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
