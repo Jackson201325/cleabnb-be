@@ -3,7 +3,6 @@ import Container from '../Container'
 import Logo from './Logo'
 import Search from './Search'
 import UserMenu from './UserMenu'
-
 type NavBarProps = {
   currentUser?: User | null
 }
