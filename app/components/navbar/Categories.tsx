@@ -1,8 +1,12 @@
-import { GiWindmill } from 'react-icons/gi'
+import { GiBarn, GiCactus, GiCastle, GiCaveEntrance, GiFishingBoat, GiForestCamp, GiIsland, GiWindmill } from 'react-icons/gi'
+import { IoDiamond } from 'react-icons/io5'
 import { MdOutlineVilla } from 'react-icons/md'
-import { TbBeach } from 'react-icons/tb'
+import { BsSnow } from 'react-icons/bs'
+import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'
+import { FaSkiing } from 'react-icons/fa'
 import Container from '../Container'
 import CategoryBox from '../CategoryBox'
+import { useSearchParams, usePathname } from 'next/navigation'
 
 export const categories = [
   {
@@ -20,11 +24,82 @@ export const categories = [
     icon: MdOutlineVilla,
     description: 'This property is close to the Villa',
   },
+  {
+    label: 'Countryside',
+    icon: TbMountain,
+    description: 'This property is close to the Mountain',
+  },
+  {
+    label: 'Pool',
+    icon: TbPool,
+    description: 'This property is close to the pool',
+  },
+  {
+    label: 'Lake',
+    icon: GiFishingBoat,
+    description: 'This property is close to the Lake',
+  },
+  {
+    label: 'Skiing',
+    icon: FaSkiing,
+    description: 'This property is close to the skiing',
+  },
+  {
+    label: 'Island',
+    icon: GiIsland,
+    description: 'This property is close to the island',
+  },
+  {
+    label: 'Castle',
+    icon: GiCastle,
+    description: 'This property has a castle nearby',
+  },
+  {
+    label: 'Camping',
+    icon: GiForestCamp,
+    description: 'This property has a camping',
+  },
+  {
+    label: 'Arctic',
+    icon: BsSnow,
+    description: 'This property has the artic nearby',
+  },
+
+  {
+    label: 'Cave',
+    icon: GiCaveEntrance,
+    description: 'This property has a cave nearby',
+  },
+
+  {
+    label: "Desert",
+    icon: GiCactus,
+    description: "This property has a desert nearby"
+  },
+  {
+    label: "Lux",
+    icon: IoDiamond,
+    description: "This property is luxurious"
+  },
+  {
+    label: "Barns",
+    icon: GiBarn,
+    description: "This property has a desert nearby"
+  }
 ]
 
-type Props = {}
+const Categories = () => {
 
-const Categories = (props: Props) => {
+  const params = useSearchParams()
+  const category_url = params?.get('category')
+  const path = usePathname()
+
+  const isMainPage = path === '/'
+
+  if (!isMainPage) {
+    return null
+  }
+
   return (
     <Container>
       <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
@@ -33,6 +108,7 @@ const Categories = (props: Props) => {
             key={category.label}
             label={category.label}
             description={category.description}
+            selected={category.label.toLowerCase() === category_url}
             icon={category.icon}
           />
         ))}

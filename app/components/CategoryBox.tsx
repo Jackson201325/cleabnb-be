@@ -1,5 +1,6 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import qs from 'query-string'
+import { useCallback } from 'react'
 import { IconType } from 'react-icons'
 
 type CategoryBoxProps = {
@@ -18,7 +19,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
   const router = useRouter()
   const params = useSearchParams()
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     let currentQuery = {}
 
     if (params) {
@@ -29,37 +30,35 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
       ...currentQuery,
       category: label.toLowerCase(),
     }
+
     if (params?.get('category') === label.toLowerCase()) {
-      delete updatedQuery.category
-    })
+      updatedQuery.category = ''
+    }
+    const url = qs.stringifyUrl({
+      url: '/',
+      query: updatedQuery,
+    }, { skipNull: true, skipEmptyString: true })
 
+    router.push(url)
+  }, [label, params, router])
 
-
-    // const query = {
-    //   qs.parse(params.toString()),
-    //   category: label.toLowerCase(),
-    // }
-    //
-    // if (params?.get('category') === label.toLowerCase()) {
-    //   delete query.category
-    // })
-  }
   return (
     <div
+      onClick={handleClick}
       className={`
-      flex
-      flex-col
-      items-center
-      justify-center
-      gap-2
-      p-3
-      border-b-2
-      hover:text-neutral-800
-      transition
-      cursor-pointer
-      ${selected ? 'text-neutral-800' : 'text-neutral-500'}
-      ${selected ? 'border-b-neutral-800' : 'border-transparent}'}
-    `}
+        flex
+        flex-col
+        items-center
+        justify-center
+        gap-2
+        p-3
+        border-b-2
+        hover:text-neutral-800
+        transition
+        cursor-pointer
+        ${selected ? 'border-b-neutral-800' : 'border-transparent'}
+        ${selected ? 'text-neutral-800' : 'text-neutral-500'}
+      `}
     >
       <Icon size={24} />
       <div className="font-medium text-sm">{label}</div>
