@@ -1,5 +1,6 @@
 'use client'
 
+import useLoginModal from '@/app/hooks/useLoginModal'
 import useRegisterModal from '@/app/hooks/useRegisterModal'
 
 import axios from 'axios'
@@ -17,6 +18,7 @@ import Modal from './Modal'
 
 const Register = () => {
   const registerModal = useRegisterModal()
+  const loginModal = useLoginModal()
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -75,6 +77,11 @@ const Register = () => {
     </div>
   )
 
+  const handleCreateAccount = () => {
+    registerModal.close()
+    loginModal.open()
+  }
+
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
       <hr />
@@ -94,9 +101,9 @@ const Register = () => {
         <div className="flex flex-row items-center gap-2 justify-center">
           <div>Already have an account?</div>
           <div
-            onClick={registerModal.close}
+            onClick={handleCreateAccount}
             className="text-neutral-800 cursor-pointer hover:underline"
-          ></div>
+          >Log In</div>
         </div>
       </div>
     </div>

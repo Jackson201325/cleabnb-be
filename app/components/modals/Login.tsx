@@ -9,6 +9,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
+import useRegisterModal from '@/app/hooks/useRegisterModal'
 import toast from 'react-hot-toast'
 import Button from '../Button'
 import Heading from '../Heading'
@@ -17,6 +18,7 @@ import Modal from './Modal'
 
 const Login = () => {
   const loginModal = useLoginModal()
+  const registerModal = useRegisterModal()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -42,10 +44,15 @@ const Login = () => {
         loginModal.close()
       }
 
-      if(callback?.error) {
+      if (callback?.error) {
         toast.error('Invalid credentials')
       }
     })
+  }
+
+  const handleCreateAccount = () => {
+    loginModal.close()
+    registerModal.open()
   }
 
   const bodyContent = (
@@ -91,9 +98,9 @@ const Login = () => {
         <div className="flex flex-row items-center gap-2 justify-center">
           <div>Dont have an acount?</div>
           <div
-            onClick={loginModal.close}
+            onClick={handleCreateAccount}
             className="text-neutral-800 cursor-pointer hover:underline"
-          ></div>
+          >Create an account</div>
         </div>
       </div>
     </div>
