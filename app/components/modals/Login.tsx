@@ -1,20 +1,18 @@
-'use client'
+"use client"
 
-import useLoginModal from '@/app/hooks/useLoginModal'
-
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
-import { AiFillGithub } from 'react-icons/ai'
-import { FcGoogle } from 'react-icons/fc'
-
-import useRegisterModal from '@/app/hooks/useRegisterModal'
-import toast from 'react-hot-toast'
-import Button from '../Button'
-import Heading from '../Heading'
-import Input from '../inputs/Input'
-import Modal from './Modal'
+import useLoginModal from "@/app/hooks/useLoginModal"
+import useRegisterModal from "@/app/hooks/useRegisterModal"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import { useCallback, useState } from "react"
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { AiFillGithub } from "react-icons/ai"
+import { FcGoogle } from "react-icons/fc"
+import Button from "../Button"
+import Heading from "../Heading"
+import Input from "../inputs/Input"
+import Modal from "./Modal"
 
 const Login = () => {
   const loginModal = useLoginModal()
@@ -27,33 +25,33 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
-    defaultValues: { email: '', password: '' },
+    defaultValues: { email: "", password: "" },
   })
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true)
 
-    signIn('credentials', {
+    signIn("credentials", {
       ...data,
       redirect: false,
     }).then((callback) => {
       setIsLoading(false)
       if (callback?.ok) {
-        toast.success('Logged in successfully')
+        toast.success("Logged in successfully")
         router.refresh()
         loginModal.close()
       }
 
       if (callback?.error) {
-        toast.error('Invalid credentials')
+        toast.error("Invalid credentials")
       }
     })
   }
 
-  const handleCreateAccount = () => {
+  const handleCreateAccount = useCallback(() => {
     loginModal.close()
     registerModal.open()
-  }
+  }, [loginModal, registerModal])
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -100,7 +98,9 @@ const Login = () => {
           <div
             onClick={handleCreateAccount}
             className="text-neutral-800 cursor-pointer hover:underline"
-          >Create an account</div>
+          >
+            Create an account
+          </div>
         </div>
       </div>
     </div>

@@ -1,15 +1,15 @@
 // We have to add this because of the onClick
-'use client'
+"use client"
 
-import useLoginModal from '@/app/hooks/useLoginModal'
-import useRegisterModal from '@/app/hooks/useRegisterModal'
-import { User } from '@prisma/client'
-import { signOut } from 'next-auth/react'
-import { useState } from 'react'
-import { AiOutlineMenu } from 'react-icons/ai'
-import Avatar from '../Avatar'
-import MenuItem from '../MenuItem'
-
+import useLoginModal from "@/app/hooks/useLoginModal"
+import useRegisterModal from "@/app/hooks/useRegisterModal"
+import useRentModal from "@/app/hooks/useRentModal"
+import { User } from "@prisma/client"
+import { signOut } from "next-auth/react"
+import { useCallback, useState } from "react"
+import { AiOutlineMenu } from "react-icons/ai"
+import Avatar from "../Avatar"
+import MenuItem from "../MenuItem"
 
 type UserMenuProps = {
   currentUser?: User | null
@@ -17,20 +17,40 @@ type UserMenuProps = {
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const toggleOpen = () => setIsOpen(!isOpen)
+  const toggleOpen = useCallback(() => {
+    setIsOpen(!isOpen)
+  }, [isOpen])
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
+  const rentModal = useRentModal()
+
+  const handleRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.open()
+    }
+
+    rentModal.open()
+    toggleOpen()
+  }, [currentUser, rentModal, loginModal, toggleOpen])
+
+  const handleLoginModal = useCallback(() => {
+    loginModal.open()
+    toggleOpen()
+  }, [toggleOpen, loginModal])
+
+  const handleRegisterModal = useCallback(() => {
+    registerModal.open()
+    toggleOpen()
+  }, [toggleOpen, registerModal])
 
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-          onClick={() => {
-            console.log('hello')
-          }}
+          onClick={handleRent}
         >
-          Aribnb your home
+          Airbnb your home
         </div>
         <div
           className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
@@ -48,35 +68,29 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             {currentUser ? (
               <>
                 <MenuItem
-                  onClick={() => console.log('My trips')}
+                  onClick={() => console.log("My trips")}
                   label="My trips"
                 />
                 <MenuItem
-                  onClick={() => console.log('My favorites')}
+                  onClick={() => console.log("My favorites")}
                   label="My favorites"
                 />
                 <MenuItem
-                  onClick={() => console.log('My Reservtions')}
+                  onClick={() => console.log("My Reservtions")}
                   label="My Reservtions"
                 />
                 <MenuItem
-                  onClick={() => console.log('My properties')}
+                  onClick={() => console.log("My properties")}
                   label="My properties"
                 />
-                <MenuItem
-                  onClick={() => console.log('Airbnb Home')}
-                  label="Airbnb Home"
-                />
+                <MenuItem onClick={handleRent} label="Airbnb Home" />
                 <hr />
-                <MenuItem
-                  onClick={() => signOut()}
-                  label="Logout"
-                />
+                <MenuItem onClick={() => signOut()} label="Logout" />
               </>
             ) : (
               <>
-                <MenuItem onClick={loginModal.open} label="Login" />
-                <MenuItem onClick={registerModal.open} label="Register" />
+                <MenuItem onClick={handleLoginModal} label="Login" />
+                <MenuItem onClick={handleRegisterModal} label="Register" />
               </>
             )}
           </div>
