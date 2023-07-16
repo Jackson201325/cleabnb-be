@@ -1,100 +1,115 @@
-import { GiBarn, GiCactus, GiCastle, GiCaveEntrance, GiFishingBoat, GiForestCamp, GiIsland, GiWindmill } from 'react-icons/gi'
-import { IoDiamond } from 'react-icons/io5'
-import { MdOutlineVilla } from 'react-icons/md'
-import { BsSnow } from 'react-icons/bs'
-import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'
-import { FaSkiing } from 'react-icons/fa'
-import Container from '../Container'
-import CategoryBox from '../CategoryBox'
-import { useSearchParams, usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from "next/navigation"
+import { IconType } from "react-icons"
+import { BsSnow } from "react-icons/bs"
+import { FaSkiing } from "react-icons/fa"
+import {
+  GiBarn,
+  GiCactus,
+  GiCastle,
+  GiCaveEntrance,
+  GiFishingBoat,
+  GiForestCamp,
+  GiIsland,
+  GiWindmill,
+} from "react-icons/gi"
+import { IoDiamond } from "react-icons/io5"
+import { MdOutlineVilla } from "react-icons/md"
+import { TbBeach, TbMountain, TbPool } from "react-icons/tb"
+import CategoryBox from "../CategoryBox"
+import Container from "../Container"
 
-export const categories = [
+type Category = {
+  label: string
+  icon: IconType
+  description: string
+}
+
+export const categories: Category[] = [
   {
-    label: 'Beach',
+    label: "Beach",
     icon: TbBeach,
-    description: 'This property is close to the beach',
+    description: "This property is close to the beach",
   },
   {
-    label: 'Windmills',
+    label: "Windmills",
     icon: GiWindmill,
-    description: 'This property is close to the Windmills',
+    description: "This property is close to the Windmills",
   },
   {
-    label: 'Modern',
+    label: "Modern",
     icon: MdOutlineVilla,
-    description: 'This property is close to the Villa',
+    description: "This property is close to the Villa",
   },
   {
-    label: 'Countryside',
+    label: "Countryside",
     icon: TbMountain,
-    description: 'This property is close to the Mountain',
+    description: "This property is close to the Mountain",
   },
   {
-    label: 'Pool',
+    label: "Pool",
     icon: TbPool,
-    description: 'This property is close to the pool',
+    description: "This property is close to the pool",
   },
   {
-    label: 'Lake',
+    label: "Lake",
     icon: GiFishingBoat,
-    description: 'This property is close to the Lake',
+    description: "This property is close to the Lake",
   },
   {
-    label: 'Skiing',
+    label: "Skiing",
     icon: FaSkiing,
-    description: 'This property is close to the skiing',
+    description: "This property is close to the skiing",
   },
   {
-    label: 'Island',
+    label: "Island",
     icon: GiIsland,
-    description: 'This property is close to the island',
+    description: "This property is close to the island",
   },
   {
-    label: 'Castle',
+    label: "Castle",
     icon: GiCastle,
-    description: 'This property has a castle nearby',
+    description: "This property has a castle nearby",
   },
   {
-    label: 'Camping',
+    label: "Camping",
     icon: GiForestCamp,
-    description: 'This property has a camping',
+    description: "This property has a camping",
   },
   {
-    label: 'Arctic',
+    label: "Arctic",
     icon: BsSnow,
-    description: 'This property has the artic nearby',
+    description: "This property has the artic nearby",
   },
 
   {
-    label: 'Cave',
+    label: "Cave",
     icon: GiCaveEntrance,
-    description: 'This property has a cave nearby',
+    description: "This property has a cave nearby",
   },
 
   {
     label: "Desert",
     icon: GiCactus,
-    description: "This property has a desert nearby"
+    description: "This property has a desert nearby",
   },
   {
     label: "Lux",
     icon: IoDiamond,
-    description: "This property is luxurious"
+    description: "This property is luxurious",
   },
   {
     label: "Barns",
     icon: GiBarn,
-    description: "This property has a desert nearby"
-  }
+    description: "This property has a desert nearby",
+  },
 ]
 
 const Categories = () => {
-
   const params = useSearchParams()
-  const category_url = params?.get('category')
+  const category_url = params?.get("category")
   const path = usePathname()
 
-  const isMainPage = path === '/'
+  const isMainPage = path === "/"
 
   if (!isMainPage) {
     return null
