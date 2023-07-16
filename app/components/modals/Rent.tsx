@@ -10,6 +10,7 @@ import { categories } from "../navbar/Categories"
 import Modal from "./Modal"
 import dynamic from "next/dynamic"
 import Counter from "../inputs/Counter"
+import ImageUpload from "../inputs/ImageUpload"
 
 enum STEPS {
   CATEGORY = 0,
@@ -39,7 +40,7 @@ const Rent: FC<Props> = () => {
       location: null,
       guestCount: 1,
       roomCount: 1,
-      bathrronCount: 1,
+      bathroomCount: 1,
       imageSource: "",
       title: "",
       description: "",
@@ -74,6 +75,7 @@ const Rent: FC<Props> = () => {
   const guestCount: number = watch("guestCount")
   const roomCount: number = watch("roomCount")
   const bathroomCount: number = watch("bathroomCount")
+  const imageSrc: string = watch("imageSrc")
 
   const Map = useMemo(
     () => dynamic(() => import("../Map"), { ssr: false }),
@@ -133,6 +135,7 @@ const Rent: FC<Props> = () => {
           title="Share some basics about your place"
           subtitle="What amenitites do you have"
         />
+
         <Counter
           title="Guests"
           subtitle="How man guests do you allow?"
@@ -153,9 +156,25 @@ const Rent: FC<Props> = () => {
 
         <Counter
           title="Bathrooms"
-          subtitle="How man bathrooms do you allow?"
+          subtitle="How many bathrooms do you have?"
           value={bathroomCount}
           onChange={(value) => setCustomValue("bathrooms", value)}
+        />
+      </div>
+    )
+  }
+
+  if (step === STEPS.IMAGES) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add a photo of your place"
+          subtitle="Show guests what your place look like!"
+        />
+
+        <ImageUpload
+          value={imageSrc}
+          onChange={(value) => setCustomValue("imageSrc", value)}
         />
       </div>
     )
