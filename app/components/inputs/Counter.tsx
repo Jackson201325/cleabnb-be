@@ -24,7 +24,6 @@ const Counter: FC<Props> = ({ title, subtitle, value, onChange }) => {
         <div className="font-medium">{title}</div>
         <div className="font-light text-gray-600">{subtitle}</div>
       </div>
-
       <div
         onClick={onReduce}
         className="

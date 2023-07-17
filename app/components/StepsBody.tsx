@@ -105,9 +105,9 @@ const StepsBody = ({
         <hr />
         <Counter
           title="Bathrooms"
-          subtitle="How many bathrooms do you have?"
+          subtitle="Number of bathroom available?"
           value={bathroomCount}
-          onChange={(value) => setCustomValue("bathrooms", value)}
+          onChange={(value) => setCustomValue("bathroomCount", value)}
         />
       </div>
     )

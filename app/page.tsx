@@ -1,7 +1,11 @@
+import Container from "@/app/components/Container"
+
 export default function Home() {
   return (
-    <main className="text-rose-50 text-2xl flex min-h-screen flex-col items-center justify-between p-24">
-      Hello Airbnb
-    </main>
+    <Container>
+      <div className="pt-24 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+        <div className="flex">My future listings</div>
+      </div>
+    </Container>
   )
 }

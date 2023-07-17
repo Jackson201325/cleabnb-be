@@ -81,7 +81,7 @@ const Rent: FC<Props> = () => {
   }, [step])
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    if (step === STEPS.PRICE) return onNext()
+    if (step !== STEPS.PRICE) return onNext()
 
     setIsLoading(true)
 
