@@ -4,7 +4,7 @@ type Props = {
   disabled?: boolean
   icon?: IconType
   label?: string
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   outline?: boolean
   small?: boolean
 }

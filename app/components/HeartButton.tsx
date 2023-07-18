@@ -1,4 +1,4 @@
-import { User } from "next-auth"
+import { User } from "@prisma/client"
 import { FC } from "react"
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 
@@ -7,15 +7,15 @@ type Props = {
   currentUser: User | null
 }
 
-const HeartButton: FC<Props> = ({ currentUser }) => {
+const HeartButton: FC<Props> = ({ currentUser, listingId }) => {
   const favourite = false
-  const toggleFavourite = () => {}
+  const toggleFavourite = () => { }
 
   return (
     <div className="relative hover:opacity-80 transition cursor-pointer">
       <AiOutlineHeart
         size={28}
-        className="fill-white absolute-top-[2px]-right-[2px]"
+        className="fill-white absolute -top-[2px]-right-[2px]"
       />
       <AiFillHeart
         size={28}
