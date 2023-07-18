@@ -1,10 +1,10 @@
 // We can only use useRouter in the client side
-'use client'
+"use client"
 
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import Image from "next/image"
+import { useRouter } from "next/navigation"
 
-import React from 'react'
+import React from "react"
 
 type Props = {}
 
