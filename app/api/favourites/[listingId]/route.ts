@@ -48,9 +48,7 @@ export async function DELETE(
 
   const { listingId } = params
 
-  if (!listingId || typeof listingId !== "string") {
-    return NextResponse.error()
-  }
+  if (!listingId || typeof listingId !== "string") return NextResponse.error()
 
   const favouriteListingIds = currentUser.favoriteIds.filter((id) => id !== listingId)
 
@@ -62,4 +60,6 @@ export async function DELETE(
       favoriteIds: [...favouriteListingIds],
     },
   })
+
+  return NextResponse.json(user)
 }

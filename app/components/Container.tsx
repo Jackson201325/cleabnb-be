@@ -1,3 +1,5 @@
+import { FC } from "react"
+
 type ContainerProps = {
   children: React.ReactNode
 }
