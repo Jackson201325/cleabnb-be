@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import React, { useCallback, useEffect, useState } from 'react'
-import { IoMdClose } from 'react-icons/io'
-import Button from '../Button'
+import React, { useCallback, useEffect, useState } from "react"
+import { IoMdClose } from "react-icons/io"
+import Button from "../Button"
 
 type Props = {
   actionLabel?: string
@@ -23,8 +23,8 @@ const Modal: React.FC<Props> = ({
   disabled,
   footer,
   isOpen,
-  onClose = () => console.log('onClose'),
-  onSubmit = () => console.log('onSubmit'),
+  onClose = () => console.log("onClose"),
+  onSubmit = () => console.log("onSubmit"),
   secondaryAction,
   secondaryActionLabel,
   title,
@@ -74,8 +74,8 @@ const Modal: React.FC<Props> = ({
             translate
             duration-300
             h-full
-            ${showModal ? 'translate-y-0' : 'translate-y-full'}
-            ${showModal ? 'opacity-100' : 'opacity-0'}
+            ${showModal ? "translate-y-0" : "translate-y-full"}
+            ${showModal ? "opacity-100" : "opacity-0"}
           `}
         >
           <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">

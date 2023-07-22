@@ -5,10 +5,10 @@ import useFavourite from "../hooks/useFavourite"
 
 type Props = {
   listingId: string
-  currentUser: User | null
+  currentUser: User
 }
 
-const HeartButton: React.FC<Props> = ({
+const HeartButton:FC<Props> = ({
   listingId,
   currentUser
 }) => {
