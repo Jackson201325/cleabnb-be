@@ -18,7 +18,7 @@ import { TbBeach, TbMountain, TbPool } from "react-icons/tb"
 import CategoryBox from "../CategoryBox"
 import Container from "../Container"
 
-type Category = {
+export type Category = {
   label: string
   icon: IconType
   description: string
