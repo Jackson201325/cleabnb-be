@@ -7,7 +7,7 @@ import { Listing, Reservation, User } from "@prisma/client"
 
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns"
 import { useRouter } from "next/navigation"
-import { FC, useEffect, useMemo, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import { Range } from "react-date-range"
 
 import axios from "axios"
@@ -65,7 +65,7 @@ const ListingClient: FC<Props> = ({
   const [totalPrice, setTotalPrice] = useState(listing.price)
   const [dateRange, setDateRange] = useState<Range>(initialDateRange)
 
-  const createReservation = async () => {
+  const createReservation = useCallback(async () => {
     if (!currentUser) {
       return loginModal.open()
     }
@@ -80,6 +80,8 @@ const ListingClient: FC<Props> = ({
       })
       .then(() => {
         toast.success("Reservation created")
+        setDateRange(initialDateRange)
+        router.push("/trips")
       })
       .catch(() => {
         toast.error("Something went wrong")
@@ -87,7 +89,7 @@ const ListingClient: FC<Props> = ({
       .finally(() => {
         setIsLoading(false)
       })
-  }
+  }, [currentUser, dateRange, listing.id, totalPrice, loginModal, router])
 
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
