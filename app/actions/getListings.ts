@@ -1,5 +1,5 @@
-import prisma from '@/app/libs/prismadb'
-import { getSession } from './getCurrentUser'
+import prisma from "@/app/libs/prismadb"
+import { getSession } from "./getCurrentUser"
 
 export async function getListings() {
   try {
@@ -9,7 +9,7 @@ export async function getListings() {
 
     const listings = await prisma.listing.findMany({
       orderBy: {
-        createdAt: 'desc'
+        createdAt: "desc",
       },
     })
 

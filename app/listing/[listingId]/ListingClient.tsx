@@ -4,11 +4,11 @@ import Container from "@/app/components/Container"
 import { categories } from "@/app/components/navbar/Categories"
 import useLoginModal from "@/app/hooks/useLoginModal"
 import { Listing, Reservation, User } from "@prisma/client"
-import { differenceInCalendarDays, eachDayOfInterval } from "date-fns"
-import { Range } from "react-date-range"
 
+import { differenceInCalendarDays, eachDayOfInterval } from "date-fns"
 import { useRouter } from "next/navigation"
-import React, { FC, useEffect, useMemo, useState } from "react"
+import { FC, useEffect, useMemo, useState } from "react"
+import { Range } from "react-date-range"
 
 import axios from "axios"
 import toast from "react-hot-toast"
@@ -30,7 +30,7 @@ const initialDateRange = {
 
 type Props = {
   listing: Listing & { user: User }
-  reservations?: Reservation[]
+  reservations?: (Reservation & { listing: Listing })[]
   currentUser: User | null
 }
 
@@ -96,7 +96,6 @@ const ListingClient: FC<Props> = ({
         dateRange.startDate,
       )
       if (totalDates > 0 && listing.price) {
-        console.log(listing.price * totalDates)
         setTotalPrice(totalDates * listing.price)
       } else {
         setTotalPrice(listing.price)
@@ -118,21 +117,21 @@ const ListingClient: FC<Props> = ({
   } = listing
 
   const listingInfoData = {
-    bathroomCount: bathroomCount,
-    category: category,
-    description: description,
-    guestCount: guestCount,
-    locationValue: locationValue,
-    roomCount: roomCount,
-    user: user,
+    bathroomCount,
+    category,
+    description,
+    guestCount,
+    locationValue,
+    roomCount,
+    user,
   }
 
   const listingHeadData = {
-    currentUser: currentUser,
+    currentUser,
     id,
-    imageSrc: imageSrc,
-    locationValue: locationValue,
-    title: title,
+    imageSrc,
+    locationValue,
+    title,
   }
 
   const listingReservationData = {

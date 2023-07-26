@@ -3,6 +3,7 @@
 import { FC } from "react"
 import { Range, RangeKeyDict } from "react-date-range"
 import Calendar from "@/app/components/inputs/Calendar"
+import Button from "@/app/components/Button"
 
 type Props = {
   dateRange: Range
@@ -23,7 +24,6 @@ const ListingReservation: FC<Props> = ({
   disabled,
   disabledDates,
 }) => {
-
   const calendarData = {
     value: dateRange,
     disabledDates,
@@ -39,6 +39,9 @@ const ListingReservation: FC<Props> = ({
       <hr />
       <Calendar {...calendarData} />
       <hr />
+      <div className="p-4">
+        <Button disabled={disabled} label="Reserve" onClick={onSubmit} />
+      </div>
       <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
         <div>Total</div>
         <div>$ {totalPrice}</div>

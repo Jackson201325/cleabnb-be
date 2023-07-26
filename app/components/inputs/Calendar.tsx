@@ -13,7 +13,6 @@ type Props = {
 }
 
 const Calendar: FC<Props> = ({ value, disabledDates, onChange }) => {
-  console.log({ value })
   return (
     <DateRange
       rangeColors={["#262626"]}

@@ -1,17 +1,10 @@
 import { getCurrentUser } from "@/app/actions/getCurrentUser"
 import { NextResponse } from "next/server"
 import prisma from "@/app/libs/prismadb"
-import { listingParamsType } from "../api/favourites/[listingId]/route"
+import { ListingParams } from "../api/favourites/[listingId]/route"
 
-export async function getListingById({
-  params,
-}: {
-  params: listingParamsType
-}) {
+export async function getListingById(params: ListingParams) {
   try {
-    // const currentUser = await getCurrentUser()
-
-    // if (!currentUser) return NextResponse.error()
     const { listingId } = params
 
     const listing = await prisma.listing.findUnique({
@@ -24,8 +17,6 @@ export async function getListingById({
     })
 
     if (!listing) return null
-
-    // if (listing && listing.userId != currentUser.id) return NextResponse.error()
 
     return listing
   } catch (error) {
