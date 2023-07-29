@@ -77,11 +77,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   label="My trips"
                 />
                 <MenuItem
-                  onClick={() => console.log("My favorites")}
+                  onClick={() => router.push("/favourites")}
                   label="My favorites"
                 />
                 <MenuItem
-                  onClick={() => console.log("My Reservtions")}
+                  onClick={() => router.push("/reservations")}
                   label="My Reservtions"
                 />
                 <MenuItem
