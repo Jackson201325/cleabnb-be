@@ -16,12 +16,6 @@ import ListingHead from "./ListingHead"
 import ListingInfo from "./ListingInfo"
 import ListingReservation from "./ListingReservation"
 
-export type DateRangeType = {
-  startDate: Date
-  endDate: Date
-  key: string
-}
-
 const initialDateRange = {
   startDate: new Date(),
   endDate: new Date(),
@@ -30,7 +24,7 @@ const initialDateRange = {
 
 type Props = {
   listing: Listing & { user: User }
-  reservations?: (Reservation & { listing: Listing })[]
+  reservations?: (Reservation & { listing: Listing })[] | null
   currentUser: User | null
 }
 
@@ -48,6 +42,8 @@ const ListingClient: FC<Props> = ({
 
   const disabledDates = useMemo(() => {
     let dates: Date[] = []
+
+    if (!reservations) return []
 
     reservations.forEach((reservation) => {
       const range = eachDayOfInterval({

@@ -1,7 +1,4 @@
 import prisma from "@/app/libs/prismadb"
-import { Reservation } from "@prisma/client"
-import { NextResponse } from "next/server"
-import { ListingParams } from "../api/favourites/[listingId]/route"
 
 export type ReservationParams = {
   userId?: string
@@ -37,7 +34,6 @@ export async function getReservations(params: ReservationParams) {
       },
     })
 
-    console.log({ reservations })
     return reservations
   } catch (error: any) {
     console.log(error)

@@ -1,9 +1,13 @@
+"use client"
+
 import Container from "@/app/components/Container"
 import { Listing, Reservation, User } from "@prisma/client"
+
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useCallback, useState } from "react"
 import toast from "react-hot-toast"
+
 import Heading from "../components/Heading"
 import ListingCard from "../components/modals/listings/ListingCard"
 
@@ -43,13 +47,14 @@ const TripsClient = ({ reservations, currentUser }: Props) => {
         title="Trips"
         subtitle="Where you have been and where you are going"
       />
-      <div className="mt-10 grid grid-cols1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
         {reservations.map((reservation) => (
           <ListingCard
             key={reservation.id}
             listing={reservation.listing}
             reservation={reservation}
             actionId={reservation.id}
+            actionLabel="Cancel Reservation"
             onAction={onCancel}
             disabled={deletingId === reservation.id}
             currentUser={currentUser}
