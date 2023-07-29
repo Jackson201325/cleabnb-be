@@ -3,9 +3,7 @@ import { getReservations } from "../actions/getReservations"
 import EmptyState from "../components/EmptyState"
 import ReservationClient from "./ReservationClient"
 
-type Props = {}
-
-const ReservationPage = async (props: Props) => {
+const ReservationPage = async () => {
   const currentUser = await getCurrentUser()
 
   if (!currentUser) {
