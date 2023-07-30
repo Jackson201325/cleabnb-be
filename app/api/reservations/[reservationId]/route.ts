@@ -1,5 +1,6 @@
 import { getCurrentUser } from "@/app/actions/getCurrentUser"
 import prisma from "@/app/libs/prismadb"
+
 import { NextResponse } from "next/server"
 
 type DeleteReservationParams = {
@@ -7,18 +8,14 @@ type DeleteReservationParams = {
 }
 
 export async function DELETE(
-  request: Request,
+  _request: Request,
   { params }: { params: DeleteReservationParams },
 ) {
   const currentUser = await getCurrentUser()
 
-  console.log({ currentUser })
-
   if (!currentUser) return NextResponse.error()
 
   const { reservationId } = params
-
-  console.log({ reservationId })
 
   const reservations = await prisma.reservation.deleteMany({
     where: {
@@ -26,8 +23,6 @@ export async function DELETE(
       OR: [{ userId: currentUser.id }, { listing: { userId: currentUser.id } }],
     },
   })
-
-  console.log({ reservations })
 
   return NextResponse.json(reservations)
 }

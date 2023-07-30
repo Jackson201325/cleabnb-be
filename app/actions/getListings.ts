@@ -1,13 +1,21 @@
 import prisma from "@/app/libs/prismadb"
-import { getSession } from "./getCurrentUser"
+import { SearchParams } from "../page"
 
-export async function getListings() {
+type ListingsParams = {
+  userId?: string | null
+  params?: SearchParams | null
+}
+
+export async function getListings({ userId, params }: ListingsParams) {
   try {
-    const session = await getSession()
+    let query: any = {}
 
-    if (!session?.user?.email) return null
+    if (userId) query.userId = userId
+
+    if (params) query.category = params.category
 
     const listings = await prisma.listing.findMany({
+      where: query,
       orderBy: {
         createdAt: "desc",
       },

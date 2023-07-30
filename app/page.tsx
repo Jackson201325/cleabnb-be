@@ -1,12 +1,17 @@
 import Container from "@/app/components/Container"
 import EmptyState from "@/app/components/EmptyState"
+
+import { getCurrentUser } from "./actions/getCurrentUser"
 import { getListings } from "./actions/getListings"
 import ListingCard from "./components/modals/listings/ListingCard"
-import { getCurrentUser } from "./actions/getCurrentUser"
 
-export default async function Home() {
-  const listings = await getListings()
+export type SearchParams = {
+  category: string
+}
+
+export default async function Home({ params }: { params: SearchParams }) {
   const currentUser = await getCurrentUser()
+  const listings = await getListings({ params })
 
   if (listings?.length === 0) return <EmptyState showReset />
 

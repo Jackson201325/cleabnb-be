@@ -11,9 +11,7 @@ const Listing = async ({ params }: { params: ListingParams }) => {
   const listing = await getListingById(params)
   const reservations = await getReservations(params)
 
-  if (!listing) {
-    return <EmptyState />
-  }
+  if (!listing) return <EmptyState />
 
   return (
     <ListingClient

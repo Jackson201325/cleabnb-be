@@ -15,6 +15,7 @@ import {
 import { IoDiamond } from "react-icons/io5"
 import { MdOutlineVilla } from "react-icons/md"
 import { TbBeach, TbMountain, TbPool } from "react-icons/tb"
+
 import CategoryBox from "../CategoryBox"
 import Container from "../Container"
 
@@ -80,13 +81,11 @@ export const categories: Category[] = [
     icon: BsSnow,
     description: "This property has the artic nearby",
   },
-
   {
     label: "Cave",
     icon: GiCaveEntrance,
     description: "This property has a cave nearby",
   },
-
   {
     label: "Desert",
     icon: GiCactus,
@@ -111,9 +110,7 @@ const Categories = () => {
 
   const isMainPage = path === "/"
 
-  if (!isMainPage) {
-    return null
-  }
+  if (!isMainPage) return null
 
   return (
     <Container>
