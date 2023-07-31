@@ -1,8 +1,14 @@
-import { BiSearch } from 'react-icons/bi'
+import useFilterModal from "@/app/hooks/useFilterModal"
+import { BiSearch } from "react-icons/bi"
 
 function Search() {
+  const { open } = useFilterModal()
+
   return (
-    <div className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer">
+    <div
+      onClick={open}
+      className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
+    >
       <div className="flex flex-row items-center justify-between">
         <div className="text-sm font-semibold px-6">Search</div>
         <div className="text-sm font-semibold px-6 hidden sm:block flex-1 border-x-[1px] text-center">

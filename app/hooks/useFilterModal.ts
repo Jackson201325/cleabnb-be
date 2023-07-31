@@ -1,15 +1,15 @@
 import { create } from "zustand"
 
-interface RegisterModalState {
+interface FilterModalState {
   isOpen: boolean
   open: () => void
   close: () => void
 }
 
-const useRegisterModal = create<RegisterModalState>((set) => ({
+const useFilterModal = create<FilterModalState>((set) => ({
   isOpen: false,
   open: () => set({ isOpen: true }),
   close: () => set({ isOpen: false }),
 }))
 
-export default useRegisterModal
+export default useFilterModal

@@ -1,4 +1,5 @@
 import { Category } from "@/app/components/navbar/Categories"
+
 import { FC } from "react"
 
 const ListingCategory: FC<Category> = ({ icon: Icon, label, description }) => {

@@ -30,3 +30,5 @@ export const NavBar: FC<NavBarProps> = ({ currentUser }) => {
     </div>
   )
 }
+
+export default NavBar

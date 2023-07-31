@@ -1,14 +1,15 @@
 import dynamic from "next/dynamic"
 import { useMemo } from "react"
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form"
+
 import Heading from "./Heading"
 import CategoryInput from "./inputs/CategoryInput"
 import Counter from "./inputs/Counter"
 import CountrySelect, { CountrySelectValue } from "./inputs/CountrySelect"
 import ImageUpload from "./inputs/ImageUpload"
 import Input from "./inputs/Input"
-import { categories } from "./navbar/Categories"
 import { STEPS } from "./modals/Rent"
+import { categories } from "./navbar/Categories"
 
 type Props = {
   step: number

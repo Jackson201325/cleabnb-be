@@ -2,12 +2,9 @@ import Container from "@/app/components/Container"
 import EmptyState from "@/app/components/EmptyState"
 
 import { getCurrentUser } from "./actions/getCurrentUser"
-import { getListings } from "./actions/getListings"
+import { SearchParams, getListings } from "./actions/getListings"
 import ListingCard from "./components/modals/listings/ListingCard"
 
-export type SearchParams = {
-  category: string
-}
 
 export default async function Home({ params }: { params: SearchParams }) {
   const currentUser = await getCurrentUser()

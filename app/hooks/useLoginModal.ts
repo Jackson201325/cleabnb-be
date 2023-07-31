@@ -1,9 +1,9 @@
-import { create } from 'zustand'
+import { create } from "zustand"
 
 interface LoginModalState {
-  isOpen: boolean;
-  open: () => void;
-  close: () => void;
+  isOpen: boolean
+  open: () => void
+  close: () => void
 }
 
 const useLoginModal = create<LoginModalState>((set) => ({

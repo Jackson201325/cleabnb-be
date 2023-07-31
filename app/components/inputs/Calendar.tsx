@@ -8,7 +8,7 @@ import "react-date-range/dist/theme/default.css"
 
 type Props = {
   value: Range
-  disabledDates: Date[]
+  disabledDates?: Date[]
   onChange: (value: RangeKeyDict) => void
 }
 

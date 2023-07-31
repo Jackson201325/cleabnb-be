@@ -16,7 +16,7 @@ import ListingHead from "./ListingHead"
 import ListingInfo from "./ListingInfo"
 import ListingReservation from "./ListingReservation"
 
-const initialDateRange = {
+export const initialDateRange = {
   startDate: new Date(),
   endDate: new Date(),
   key: "selection",

@@ -1,20 +1,15 @@
-'use client'
+"use client"
 
 import { IconType } from "react-icons"
 
 type Props = {
-  icon: IconType,
+  icon: IconType
   label: string
-  onClick: (value: string) => void,
-  selected: boolean,
+  onClick: (value: string) => void
+  selected: boolean
 }
 
-const CategoryInput = ({
-  icon: Icon,
-  label,
-  onClick,
-  selected,
-}: Props) => {
+const CategoryInput = ({ icon: Icon, label, onClick, selected }: Props) => {
   return (
     <div
       onClick={() => onClick(label)}
@@ -28,8 +23,9 @@ const CategoryInput = ({
         hover:border-black
         transition
         cursor-pointer
-        ${selected ? 'border-black' : 'border-neutral-200'}
-      `}>
+        ${selected ? "border-black" : "border-neutral-200"}
+      `}
+    >
       <Icon size={30} />
       <div className="font-semibold">{label}</div>
     </div>

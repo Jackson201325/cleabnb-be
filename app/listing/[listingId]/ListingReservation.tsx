@@ -1,9 +1,9 @@
 "use client"
 
+import Button from "@/app/components/Button"
+import Calendar from "@/app/components/inputs/Calendar"
 import { FC } from "react"
 import { Range, RangeKeyDict } from "react-date-range"
-import Calendar from "@/app/components/inputs/Calendar"
-import Button from "@/app/components/Button"
 
 type Props = {
   dateRange: Range

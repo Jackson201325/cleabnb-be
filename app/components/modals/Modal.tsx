@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react"
 import { IoMdClose } from "react-icons/io"
+
 import Button from "../Button"
 
 type Props = {
@@ -89,8 +90,12 @@ const Modal: React.FC<Props> = ({
               </button>
               <div className="text-lg font-semibold">{title}</div>
             </div>
+            {/* HEADER */}
+
             {/* BODY */}
             <div className="relative p-6 flex-auto">{body}</div>
+            {/* BODY */}
+
             {/* FOOTER */}
             <div className="flex flex-col gap-2 p-6">
               <div className="flex flex-row items-center gap-4 w-full">
@@ -110,6 +115,7 @@ const Modal: React.FC<Props> = ({
               </div>
               {footer}
             </div>
+            {/* FOOTER */}
           </div>
         </div>
       </div>

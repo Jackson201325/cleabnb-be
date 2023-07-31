@@ -1,7 +1,8 @@
 import { useRouter } from "next/navigation"
-import React, { FC } from "react"
-import Heading from "./Heading"
+import { FC } from "react"
+
 import Button from "./Button"
+import Heading from "./Heading"
 
 type Props = {
   title?: string

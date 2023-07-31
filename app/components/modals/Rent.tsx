@@ -1,14 +1,16 @@
 "use client"
 
 import useRentModal from "@/app/hooks/useRentModal"
-import { FC, useMemo, useState } from "react"
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
-import { CountrySelectValue } from "../inputs/CountrySelect"
-import Modal from "./Modal"
-import StepsBody from "../StepsBody"
+
 import axios from "axios"
 import { useRouter } from "next/navigation"
+import { FC, useMemo, useState } from "react"
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import StepsBody from "../StepsBody"
+import { CountrySelectValue } from "../inputs/CountrySelect"
+import Modal from "./Modal"
 
 export enum STEPS {
   CATEGORY = 0,

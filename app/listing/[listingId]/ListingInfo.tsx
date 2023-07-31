@@ -1,10 +1,12 @@
 import Avatar from "@/app/components/Avatar"
 import { Category } from "@/app/components/navbar/Categories"
-import { User } from "@prisma/client"
-import { FC, useMemo } from "react"
-import ListingCategory from "./ListingCategory"
-import dynamic from "next/dynamic"
 import useCountries from "@/app/hooks/useCountries"
+import { User } from "@prisma/client"
+
+import dynamic from "next/dynamic"
+import { FC, useMemo } from "react"
+
+import ListingCategory from "./ListingCategory"
 
 const Map = dynamic(() => import("../../components/Map"), { ssr: false })
 
@@ -29,7 +31,11 @@ const ListingInfo: FC<ListingInfoProps> = ({
 }) => {
   const { getByValue } = useCountries()
 
-  const coordinates = getByValue(locationValue)
+  const coordinates = useMemo(
+    () => getByValue(locationValue),
+    [getByValue, locationValue],
+  )
+
   return (
     <div className="col-span-4 flex flex-col gap-8">
       <div className="flex flex-col gap-2">
@@ -51,7 +57,7 @@ const ListingInfo: FC<ListingInfoProps> = ({
 
       <hr />
 
-      <Map center={coordinates?.latlng}/>
+      <Map center={coordinates?.latlng} />
     </div>
   )
 }
