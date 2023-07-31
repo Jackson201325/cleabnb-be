@@ -6,9 +6,9 @@ import { SearchParams, getListings } from "./actions/getListings"
 import ListingCard from "./components/modals/listings/ListingCard"
 
 
-export default async function Home({ params }: { params: SearchParams }) {
+export default async function Home({ searchParams }: { searchParams: SearchParams }) {
   const currentUser = await getCurrentUser()
-  const listings = await getListings({ params })
+  const listings = await getListings({ searchParams })
 
   if (listings?.length === 0) return <EmptyState showReset />
 

@@ -7,15 +7,15 @@ export type SearchParams = {
   guestCount?: number
   bathroomCount?: number
   roomCount?: number
-  locationValue?: string
+  location?: string
 }
 
 type ListingsParams = {
-  userId?: string | null
-  params?: SearchParams
+  userId?: string
+  searchParams?: SearchParams
 }
 
-export async function getListings({ userId, params }: ListingsParams) {
+export async function getListings({ userId, searchParams }: ListingsParams) {
   try {
     let query: any = {}
     const {
@@ -25,8 +25,10 @@ export async function getListings({ userId, params }: ListingsParams) {
       guestCount,
       bathroomCount,
       roomCount,
-      locationValue,
-    } = params ?? {}
+      location,
+    } = searchParams ?? {}
+
+    console.log({ searchParams })
 
     if (userId) query.userId = userId
 
@@ -34,11 +36,11 @@ export async function getListings({ userId, params }: ListingsParams) {
 
     if (roomCount) query.roomCount = { gte: +roomCount }
 
-    if (guestCount) query.roomCount = { gte: +guestCount }
+    if (guestCount) query.guestCount = { gte: +guestCount }
 
-    if (bathroomCount) query.roomCount = { gte: +bathroomCount }
+    if (bathroomCount) query.bathroomCount = { gte: +bathroomCount }
 
-    if (locationValue) query.locationValue = locationValue
+    if (location) query.locationValue = location
 
     if (startDate && endDate) {
       query.NOT = {
@@ -58,6 +60,8 @@ export async function getListings({ userId, params }: ListingsParams) {
         },
       }
     }
+
+    console.log({ query })
 
     const listings = await prisma.listing.findMany({
       where: query,
