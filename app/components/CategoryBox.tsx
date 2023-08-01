@@ -1,7 +1,7 @@
-import { useRouter, useSearchParams } from 'next/navigation'
-import qs from 'query-string'
-import { useCallback } from 'react'
-import { IconType } from 'react-icons'
+import { useRouter, useSearchParams } from "next/navigation"
+import qs from "query-string"
+import { useCallback } from "react"
+import { IconType } from "react-icons"
 
 type CategoryBoxProps = {
   description: string
@@ -31,13 +31,16 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
       category: label,
     }
 
-    if (params?.get('category') === label.toLowerCase()) {
-      updatedQuery.category = ''
+    if (params?.get("category") === label.toLowerCase()) {
+      updatedQuery.category = ""
     }
-    const url = qs.stringifyUrl({
-      url: '/',
-      query: updatedQuery,
-    }, { skipNull: true, skipEmptyString: true })
+    const url = qs.stringifyUrl(
+      {
+        url: "/",
+        query: updatedQuery,
+      },
+      { skipNull: true, skipEmptyString: true },
+    )
 
     router.push(url)
   }, [label, params, router])
@@ -56,8 +59,8 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
         hover:text-neutral-800
         transition
         cursor-pointer
-        ${selected ? 'border-b-neutral-800' : 'border-transparent'}
-        ${selected ? 'text-neutral-800' : 'text-neutral-500'}
+        ${selected ? "border-b-neutral-800" : "border-transparent"}
+        ${selected ? "text-neutral-800" : "text-neutral-500"}
       `}
     >
       <Icon size={24} />
