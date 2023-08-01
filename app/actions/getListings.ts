@@ -28,8 +28,6 @@ export async function getListings({ userId, searchParams }: ListingsParams) {
       location,
     } = searchParams ?? {}
 
-    console.log({ searchParams })
-
     if (userId) query.userId = userId
 
     if (category) query.category = category

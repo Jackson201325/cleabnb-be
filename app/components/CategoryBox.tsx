@@ -28,7 +28,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
 
     const updatedQuery = {
       ...currentQuery,
-      category: label.toLowerCase(),
+      category: label,
     }
 
     if (params?.get('category') === label.toLowerCase()) {
