@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import useLoginModal from "@/app/hooks/useLoginModal"
-import useRegisterModal from "@/app/hooks/useRegisterModal"
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
 
-import { signIn } from "next-auth/react"
-import { useRouter } from "next/navigation"
-import { useCallback, useState } from "react"
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
-import toast from "react-hot-toast"
-import { AiFillGithub } from "react-icons/ai"
-import { FcGoogle } from "react-icons/fc"
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { AiFillGithub } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 
-import Button from "../Button"
-import Heading from "../Heading"
-import Input from "../inputs/Input"
-import Modal from "./Modal"
+import Button from "../Button";
+import Heading from "../Heading";
+import Input from "../inputs/Input";
+import Modal from "./Modal";
 
 const Login = () => {
-  const loginModal = useLoginModal()
-  const registerModal = useRegisterModal()
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
+  const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -28,32 +28,32 @@ const Login = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: { email: "", password: "" },
-  })
+  });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     signIn("credentials", {
       ...data,
       redirect: false,
     }).then((callback) => {
-      setIsLoading(false)
+      setIsLoading(false);
       if (callback?.ok) {
-        toast.success("Logged in successfully")
-        router.refresh()
-        loginModal.close()
+        toast.success("Logged in successfully");
+        router.refresh();
+        loginModal.close();
       }
 
       if (callback?.error) {
-        toast.error("Invalid credentials")
+        toast.error("Invalid credentials");
       }
-    })
-  }
+    });
+  };
 
   const handleCreateAccount = useCallback(() => {
-    loginModal.close()
-    registerModal.open()
-  }, [loginModal, registerModal])
+    loginModal.close();
+    registerModal.open();
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -77,7 +77,7 @@ const Login = () => {
         required
       />
     </div>
-  )
+  );
 
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
@@ -106,7 +106,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
+  );
 
   return (
     <Modal
@@ -119,7 +119,7 @@ const Login = () => {
       onSubmit={handleSubmit(onSubmit)}
       title="Login"
     />
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

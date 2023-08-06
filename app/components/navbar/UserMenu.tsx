@@ -1,55 +1,59 @@
 // We have to add this because of the onClick
-"use client"
+"use client";
 
-import useLoginModal from "@/app/hooks/useLoginModal"
-import useRegisterModal from "@/app/hooks/useRegisterModal"
-import useRentModal from "@/app/hooks/useRentModal"
-import { User } from "@prisma/client"
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useOutsideClick from "@/app/hooks/useOutsideClick";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useRentModal from "@/app/hooks/useRentModal";
+import { User } from "@prisma/client";
 
-import { signOut } from "next-auth/react"
-import { useRouter } from "next/navigation"
-import { useCallback, useState } from "react"
-import { AiOutlineMenu } from "react-icons/ai"
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useCallback, useRef, useState } from "react";
+import { AiOutlineMenu } from "react-icons/ai";
 
-import Avatar from "../Avatar"
-import MenuItem from "../MenuItem"
+import Avatar from "../Avatar";
+import MenuItem from "../MenuItem";
 
 type UserMenuProps = {
-  currentUser?: User | null
-}
+  currentUser?: User | null;
+};
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const toggleOpen = useCallback(() => {
-    setIsOpen(!isOpen)
-  }, [isOpen])
+    setIsOpen(!isOpen);
+  }, [isOpen]);
 
-  const router = useRouter()
-  const registerModal = useRegisterModal()
-  const loginModal = useLoginModal()
-  const rentModal = useRentModal()
+  const router = useRouter();
+  const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
+  const rentModal = useRentModal();
 
   const handleRent = useCallback(() => {
     if (!currentUser) {
-      return loginModal.open()
+      return loginModal.open();
     }
 
-    rentModal.open()
-    toggleOpen()
-  }, [currentUser, rentModal, loginModal, toggleOpen])
+    rentModal.open();
+    toggleOpen();
+  }, [currentUser, rentModal, loginModal, toggleOpen]);
+
+  useOutsideClick(dropdownRef, () => setIsOpen(false), isOpen);
 
   const handleLoginModal = useCallback(() => {
-    loginModal.open()
-    toggleOpen()
-  }, [toggleOpen, loginModal])
+    loginModal.open();
+    toggleOpen();
+  }, [toggleOpen, loginModal]);
 
   const handleRegisterModal = useCallback(() => {
-    registerModal.open()
-    toggleOpen()
-  }, [toggleOpen, registerModal])
+    registerModal.open();
+    toggleOpen();
+  }, [toggleOpen, registerModal]);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <div className="flex flex-row items-center gap-3">
         <div
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
@@ -102,10 +106,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default UserMenu
+export default UserMenu;
 
 // We should not be using && for conditional rendering
 // when are not sure if the value is a boolean

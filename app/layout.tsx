@@ -1,10 +1,10 @@
 import { Nunito } from "next/font/google"
 
 import { getCurrentUser } from "./actions/getCurrentUser"
+import Filter from "./components/modals/Filter"
 import Login from "./components/modals/Login"
 import Register from "./components/modals/Register"
 import Rent from "./components/modals/Rent"
-import Filter from "./components/modals/filter"
 import NavBar from "./components/navbar/Navbar"
 import ToasterProvider from "./components/providers/ToasterProvider"
 import "./globals.css"

@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import Calendar from "@/app/components/inputs/Calendar"
-import useFilterModal from "@/app/hooks/useFilterModal"
-import { initialDateRange } from "@/app/listing/[listingId]/ListingClient"
+import Calendar from "@/app/components/inputs/Calendar";
+import useFilterModal from "@/app/hooks/useFilterModal";
+import { initialDateRange } from "@/app/listing/[listingId]/ListingClient";
 
-import dynamic from "next/dynamic"
-import { useRouter, useSearchParams } from "next/navigation"
-import qs from "query-string"
-import { useCallback, useMemo, useState } from "react"
+import dynamic from "next/dynamic";
+import { useRouter, useSearchParams } from "next/navigation";
+import qs from "query-string";
+import { useCallback, useMemo, useState } from "react";
+import { Range } from "react-date-range";
 
-import { Range } from "react-date-range"
-import Heading from "../Heading"
-import Counter from "../inputs/Counter"
-import CountrySelect, { CountrySelectValue } from "../inputs/CountrySelect"
-import Modal from "./Modal"
+import Heading from "../Heading";
+import Counter from "../inputs/Counter";
+import CountrySelect, { CountrySelectValue } from "../inputs/CountrySelect";
+import Modal from "./Modal";
 
 enum STEPS {
   LOCATION = 0,
@@ -22,44 +22,51 @@ enum STEPS {
 }
 
 const Filter = () => {
-  const filterModal = useFilterModal()
-  const params = useSearchParams()
-  const router = useRouter()
+  const filterModal = useFilterModal();
+  const params = useSearchParams();
+  const router = useRouter();
 
-  const [location, setLocation] = useState<CountrySelectValue>()
-  const [step, setStep] = useState(STEPS.LOCATION)
-  const [guestCount, setGuestCount] = useState(1)
-  const [roomCount, setRoomCount] = useState(1)
-  const [bathroomCount, setBathroomCount] = useState(1)
-  const [dateRange, setDateRange] = useState<Range>(initialDateRange)
+  const [location, setLocation] = useState<CountrySelectValue>();
+  const [step, setStep] = useState(STEPS.LOCATION);
+  const [guestCount, setGuestCount] = useState(1);
+  const [roomCount, setRoomCount] = useState(1);
+  const [bathroomCount, setBathroomCount] = useState(1);
+  const [dateRange, setDateRange] = useState<Range>(initialDateRange);
   // const [category, setCategory] = useState(null)
   // const [priceRange, setPriceRange] = useState([0, 1000])
+
+  //   currentRef: filterRef,
+  //   callbackFunc: filterModal.close,
+  // };
+
+  // onClose={filterModal.close}
+  // useOutsideClick(outsideClick);
 
   const Map = useMemo(
     () => dynamic(() => import("../Map"), { ssr: false }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [location],
-  )
+  );
 
   const onBack = useCallback(() => {
-    if (step === STEPS.LOCATION) return
+    if (step === STEPS.LOCATION) return;
 
-    setStep((value) => value - 1)
-  }, [step])
+    setStep((value) => value - 1);
+  }, [step]);
 
   const onNext = useCallback(() => {
-    setStep((value) => value + 1)
-  }, [])
+    setStep((value) => value + 1);
+  }, []);
 
   const onSubmit = useCallback(() => {
     if (step !== STEPS.INFO) {
-      return onNext()
+      return onNext();
     }
 
-    let currentParams = {}
+    let currentParams = {};
 
     if (params) {
-      currentParams = qs.parse(params.toString())
+      currentParams = qs.parse(params.toString());
     }
 
     const updatedParams = {
@@ -74,7 +81,7 @@ const Filter = () => {
           : "",
       endDate:
         dateRange && dateRange.endDate ? dateRange.endDate.toISOString() : "",
-    }
+    };
 
     const url = qs.stringifyUrl(
       {
@@ -82,11 +89,11 @@ const Filter = () => {
         query: updatedParams,
       },
       { skipNull: true },
-    )
+    );
 
-    setStep(STEPS.LOCATION)
-    filterModal.close()
-    router.push(url)
+    setStep(STEPS.LOCATION);
+    filterModal.close();
+    router.push(url);
   }, [
     bathroomCount,
     dateRange,
@@ -98,22 +105,22 @@ const Filter = () => {
     roomCount,
     router,
     step,
-  ])
+  ]);
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.INFO) {
-      return "Apply filters"
+      return "Apply filters";
     }
 
-    return "Next"
-  }, [step])
+    return "Next";
+  }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
     if (step === STEPS.LOCATION) {
-      return undefined
+      return undefined;
     }
-    return "Back"
-  }, [step])
+    return "Back";
+  }, [step]);
 
   let bodyContent = (
     <div className="flex flex-col gap-8">
@@ -128,7 +135,7 @@ const Filter = () => {
       <hr />
       <Map center={location?.latlng} />
     </div>
-  )
+  );
 
   if (step === STEPS.DATE) {
     bodyContent = (
@@ -142,7 +149,7 @@ const Filter = () => {
           onChange={(dateRange) => setDateRange(dateRange.selection)}
         />
       </div>
-    )
+    );
   }
 
   if (step === STEPS.INFO) {
@@ -168,7 +175,7 @@ const Filter = () => {
           onChange={(value) => setBathroomCount(value)}
         />
       </div>
-    )
+    );
   }
 
   return (
@@ -182,7 +189,7 @@ const Filter = () => {
       actionLabel={actionLabel}
       body={bodyContent}
     />
-  )
-}
+  );
+};
 
-export default Filter
+export default Filter;

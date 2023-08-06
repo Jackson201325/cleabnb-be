@@ -1,22 +1,23 @@
-"use client"
+"use client";
 
-import React, { useCallback, useEffect, useState } from "react"
-import { IoMdClose } from "react-icons/io"
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { IoMdClose } from "react-icons/io";
 
-import Button from "../Button"
+import useOutsideClick from "@/app/hooks/useOutsideClick";
+import Button from "../Button";
 
 type Props = {
-  actionLabel?: string
-  body?: React.ReactNode
-  disabled?: boolean
-  footer?: React.ReactNode
-  isOpen?: boolean
-  onClose?: () => void
-  onSubmit?: () => void
-  secondaryAction?: () => void
-  secondaryActionLabel?: string
-  title?: string
-}
+  actionLabel?: string;
+  body?: React.ReactNode;
+  disabled?: boolean;
+  footer?: React.ReactNode;
+  isOpen?: boolean;
+  onClose: () => void;
+  onSubmit: () => void;
+  secondaryAction?: () => void;
+  secondaryActionLabel?: string;
+  title?: string;
+};
 
 const Modal: React.FC<Props> = ({
   actionLabel,
@@ -24,46 +25,49 @@ const Modal: React.FC<Props> = ({
   disabled,
   footer,
   isOpen,
-  onClose = () => console.log("onClose"),
-  onSubmit = () => console.log("onSubmit"),
+  onClose,
+  onSubmit,
   secondaryAction,
   secondaryActionLabel,
   title,
 }) => {
-  const [showModal, setShowModal] = useState(isOpen)
+  const [showModal, setShowModal] = useState(isOpen);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    setShowModal(isOpen)
-  }, [isOpen])
+    setShowModal(isOpen);
+  }, [isOpen]);
 
   const handleClose = useCallback(() => {
     if (disabled) {
-      return
+      return;
     }
-    setShowModal(false)
+    setShowModal(false);
     setTimeout(() => {
-      onClose()
-    }, 300)
-  }, [setShowModal, disabled, onClose])
+      onClose();
+    }, 300);
+  }, [setShowModal, disabled, onClose]);
+
+  useOutsideClick(ref, handleClose, isOpen);
 
   const handleSecondaryAction = useCallback(() => {
     if (disabled || !secondaryAction) {
-      return
+      return;
     }
 
-    secondaryAction()
-  }, [disabled, secondaryAction])
+    secondaryAction();
+  }, [disabled, secondaryAction]);
 
   const handleSubmit = useCallback(() => {
     if (disabled) {
-      return
+      return;
     }
 
-    onSubmit()
-  }, [disabled, onSubmit])
+    onSubmit();
+  }, [disabled, onSubmit]);
 
   if (!isOpen) {
-    return null
+    return null;
   }
 
   return (
@@ -71,6 +75,7 @@ const Modal: React.FC<Props> = ({
       <div className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto">
         {/* CONTENT */}
         <div
+          ref={ref}
           className={`
             translate
             duration-300
@@ -120,7 +125,7 @@ const Modal: React.FC<Props> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

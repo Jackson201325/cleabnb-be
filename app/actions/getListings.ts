@@ -1,23 +1,23 @@
-import prisma from "@/app/libs/prismadb"
+import prisma from "@/app/libs/prismadb";
 
 export type SearchParams = {
-  category?: string
-  startDate?: string
-  endDate?: string
-  guestCount?: number
-  bathroomCount?: number
-  roomCount?: number
-  location?: string
-}
+  category?: string;
+  startDate?: string;
+  endDate?: string;
+  guestCount?: number;
+  bathroomCount?: number;
+  roomCount?: number;
+  location?: string;
+};
 
 type ListingsParams = {
-  userId?: string
-  searchParams?: SearchParams
-}
+  userId?: string;
+  searchParams?: SearchParams;
+};
 
 export async function getListings({ userId, searchParams }: ListingsParams) {
   try {
-    let query: any = {}
+    let query: any = {};
     const {
       category,
       startDate,
@@ -26,19 +26,19 @@ export async function getListings({ userId, searchParams }: ListingsParams) {
       bathroomCount,
       roomCount,
       location,
-    } = searchParams ?? {}
+    } = searchParams ?? {};
 
-    if (userId) query.userId = userId
+    if (userId) query.userId = userId;
 
-    if (category) query.category = category
+    if (category) query.category = category;
 
-    if (roomCount) query.roomCount = { gte: +roomCount }
+    if (roomCount) query.roomCount = { gte: +roomCount };
 
-    if (guestCount) query.guestCount = { gte: +guestCount }
+    if (guestCount) query.guestCount = { gte: +guestCount };
 
-    if (bathroomCount) query.bathroomCount = { gte: +bathroomCount }
+    if (bathroomCount) query.bathroomCount = { gte: +bathroomCount };
 
-    if (location) query.locationValue = location
+    if (location) query.locationValue = location;
 
     if (startDate && endDate) {
       query.NOT = {
@@ -56,23 +56,21 @@ export async function getListings({ userId, searchParams }: ListingsParams) {
             ],
           },
         },
-      }
+      };
     }
-
-    console.log({ query })
 
     const listings = await prisma.listing.findMany({
       where: query,
       orderBy: {
         createdAt: "desc",
       },
-    })
+    });
 
-    if (!listings) return null
+    if (!listings) return null;
 
-    return listings
+    return listings;
   } catch (error: any) {
-    console.log(error)
-    return null
+    console.log(error);
+    return null;
   }
 }
