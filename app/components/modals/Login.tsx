@@ -84,13 +84,13 @@ const Login = () => {
       <hr />
       <Button
         outline
-        label="Register with Google"
+        label="Sign In with Google"
         icon={FcGoogle}
         onClick={() => signIn("google")}
       />
       <Button
         outline
-        label="Register With Github"
+        label="Sign In With Github"
         icon={AiFillGithub}
         onClick={() => signIn("github")}
       />

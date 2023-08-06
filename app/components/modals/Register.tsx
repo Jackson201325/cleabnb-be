@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import useLoginModal from "@/app/hooks/useLoginModal"
-import useRegisterModal from "@/app/hooks/useRegisterModal"
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
 
-import axios from "axios"
-import { signIn } from "next-auth/react"
-import { useCallback, useState } from "react"
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
-import { toast } from "react-hot-toast"
-import { AiFillGithub } from "react-icons/ai"
-import { FcGoogle } from "react-icons/fc"
+import axios from "axios";
+import { signIn } from "next-auth/react";
+import { useCallback, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { AiFillGithub } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 
-import Button from "../Button"
-import Heading from "../Heading"
-import Input from "../inputs/Input"
-import Modal from "./Modal"
+import Button from "../Button";
+import Heading from "../Heading";
+import Input from "../inputs/Input";
+import Modal from "./Modal";
 
 const Register = () => {
-  const registerModal = useRegisterModal()
-  const loginModal = useLoginModal()
-  const [isLoading, setIsLoading] = useState(false)
+  const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -27,26 +27,26 @@ const Register = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: { name: "", email: "", password: "" },
-  })
+  });
 
   const onSubmit: SubmitHandler<FieldValues> = useCallback(
     async (data) => {
-      setIsLoading(true)
+      setIsLoading(true);
       axios
         .post("/api/register", data)
         .then(() => {
-          loginModal.open()
-          registerModal.close()
+          loginModal.open();
+          registerModal.close();
         })
         .catch((error) => {
-          toast.error(error.response.data.message)
+          toast.error(error.response.data.message);
         })
         .finally(() => {
-          setIsLoading(false)
-        })
+          setIsLoading(false);
+        });
     },
     [registerModal, loginModal],
-  )
+  );
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -79,25 +79,25 @@ const Register = () => {
         required
       />
     </div>
-  )
+  );
 
   const handleLoginAccount = useCallback(() => {
-    registerModal.close()
-    loginModal.open()
-  }, [loginModal, registerModal])
+    registerModal.close();
+    loginModal.open();
+  }, [loginModal, registerModal]);
 
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
       <hr />
       <Button
         outline
-        label="Sign In With Google"
+        label="Register With Google"
         icon={FcGoogle}
         onClick={() => signIn("google")}
       />
       <Button
         outline
-        label="Sign In With Github"
+        label="Register With Github"
         icon={AiFillGithub}
         onClick={() => signIn("github")}
       />
@@ -113,7 +113,7 @@ const Register = () => {
         </div>
       </div>
     </div>
-  )
+  );
 
   return (
     <Modal
@@ -126,7 +126,7 @@ const Register = () => {
       onSubmit={handleSubmit(onSubmit)}
       title="Register"
     />
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
