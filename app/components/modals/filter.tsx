@@ -166,7 +166,7 @@ const Filter = () => {
           title="Rooms"
           subtitle="How many rooms?"
           value={roomCount}
-          onChange={() => setRoomCount}
+          onChange={(value) => setRoomCount(value)}
         />
         <Counter
           title="Bathrooms"
