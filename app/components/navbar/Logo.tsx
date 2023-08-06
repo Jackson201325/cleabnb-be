@@ -6,9 +6,7 @@ import { useRouter } from "next/navigation";
 
 import React from "react";
 
-type Props = {};
-
-const Logo = (props: Props) => {
+const Logo = () => {
   const router = useRouter();
 
   return (

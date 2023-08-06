@@ -37,8 +37,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     }
 
     rentModal.open();
-    toggleOpen();
-  }, [currentUser, rentModal, loginModal, toggleOpen]);
+  }, [currentUser, rentModal, loginModal]);
 
   useOutsideClick(dropdownRef, () => setIsOpen(false), isOpen);
 
