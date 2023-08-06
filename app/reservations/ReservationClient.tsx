@@ -1,3 +1,5 @@
+"use client"
+
 import Container from "@/app/components/Container"
 import { Listing, Reservation, User } from "@prisma/client"
 
