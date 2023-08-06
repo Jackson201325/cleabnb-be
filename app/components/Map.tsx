@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import L from "leaflet"
-import makerIcon2x from "leaflet/dist/images/marker-icon-2x.png"
-import markerIcon from "leaflet/dist/images/marker-icon.png"
-import markerShadow from "leaflet/dist/images/marker-shadow.png"
-import "leaflet/dist/leaflet.css"
-import { FC } from "react"
-import { MapContainer, Marker, TileLayer } from "react-leaflet"
+import L from "leaflet";
+import makerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import "leaflet/dist/leaflet.css";
+import { FC } from "react";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 
 // @ts-ignore
-delete L.Icon.Default.prototype._getIconUrl
+delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconUrl: markerIcon.src,
   iconRetinaUrl: makerIcon2x.src,
   shadowUrl: markerShadow.src,
-})
+});
 
 type Props = {
-  center?: number[]
-}
+  center?: number[];
+};
 
 const Map: FC<Props> = ({ center }) => {
   return (
@@ -34,7 +34,7 @@ const Map: FC<Props> = ({ center }) => {
       />
       {center ? <Marker position={center as L.LatLngExpression} /> : null}
     </MapContainer>
-  )
-}
+  );
+};
 
-export default Map
+export default Map;

@@ -1,28 +1,28 @@
-import { getCurrentUser } from "@/app/actions/getCurrentUser"
-import prisma from "@/app/libs/prismadb"
-import { NextResponse } from "next/server"
+import { getCurrentUser } from "@/app/actions/getCurrentUser";
+import prisma from "@/app/libs/prismadb";
+import { NextResponse } from "next/server";
 
 export type ListingParams = {
-  listingId?: string
-}
+  listingId?: string;
+};
 
 export async function POST(
   _request: Request,
-  { params }: { params: ListingParams },
+  { params }: { params: ListingParams }
 ) {
-  const currentUser = await getCurrentUser()
+  const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.error()
+    return NextResponse.error();
   }
 
-  const { listingId } = params
+  const { listingId } = params;
 
   if (!listingId || typeof listingId !== "string") {
-    return NextResponse.error()
+    return NextResponse.error();
   }
 
-  const favouriteListingIds = currentUser.favoriteIds || []
+  const favouriteListingIds = currentUser.favoriteIds || [];
 
   const user = await prisma.user.update({
     where: {
@@ -31,26 +31,28 @@ export async function POST(
     data: {
       favoriteIds: [...favouriteListingIds, listingId],
     },
-  })
+  });
 
-  return NextResponse.json(user)
+  return NextResponse.json(user);
 }
 
 export async function DELETE(
   _request: Request,
-  { params }: { params: ListingParams },
+  { params }: { params: ListingParams }
 ) {
-  const currentUser = await getCurrentUser()
+  const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.error()
+    return NextResponse.error();
   }
 
-  const { listingId } = params
+  const { listingId } = params;
 
-  if (!listingId || typeof listingId !== "string") return NextResponse.error()
+  if (!listingId || typeof listingId !== "string") return NextResponse.error();
 
-  const favouriteListingIds = currentUser.favoriteIds.filter((id) => id !== listingId)
+  const favouriteListingIds = currentUser.favoriteIds.filter(
+    (id) => id !== listingId
+  );
 
   const user = await prisma.user.update({
     where: {
@@ -59,7 +61,7 @@ export async function DELETE(
     data: {
       favoriteIds: [...favouriteListingIds],
     },
-  })
+  });
 
-  return NextResponse.json(user)
+  return NextResponse.json(user);
 }

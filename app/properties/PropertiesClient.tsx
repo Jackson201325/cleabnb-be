@@ -1,45 +1,45 @@
-"use client"
+"use client";
 
-import Container from "@/app/components/Container"
-import { Listing, User } from "@prisma/client"
+import Container from "@/app/components/Container";
+import { Listing, User } from "@prisma/client";
 
-import axios from "axios"
-import { useRouter } from "next/navigation"
-import { FC, useCallback, useState } from "react"
-import toast from "react-hot-toast"
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { FC, useCallback, useState } from "react";
+import toast from "react-hot-toast";
 
-import Heading from "../components/Heading"
-import ListingCard from "../components/modals/listings/ListingCard"
+import Heading from "../components/Heading";
+import ListingCard from "../components/modals/listings/ListingCard";
 
 type Props = {
-  listings: Listing[]
-  currentUser: User
-}
+  listings: Listing[];
+  currentUser: User;
+};
 
 const PropertyClient: FC<Props> = ({ listings, currentUser }) => {
-  const router = useRouter()
-  const [deletingId, setDeletingId] = useState("")
+  const router = useRouter();
+  const [deletingId, setDeletingId] = useState("");
 
   const onDelete = useCallback(
     (id: string) => {
-      setDeletingId(id)
+      setDeletingId(id);
 
       axios
         .delete(`/api/listing/${id}`)
         .then(() => {
-          toast.success("Listing deleted")
-          router.refresh()
+          toast.success("Listing deleted");
+          router.refresh();
         })
         .catch((error) => {
-          console.error(error)
-          toast.error("Error deleting listing")
+          console.error(error);
+          toast.error("Error deleting listing");
         })
         .finally(() => {
-          setDeletingId("")
-        })
+          setDeletingId("");
+        });
     },
-    [router],
-  )
+    [router]
+  );
 
   return (
     <Container>
@@ -58,7 +58,7 @@ const PropertyClient: FC<Props> = ({ listings, currentUser }) => {
         ))}
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default PropertyClient
+export default PropertyClient;

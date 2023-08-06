@@ -1,16 +1,16 @@
-import prisma from "@/app/libs/prismadb"
+import prisma from "@/app/libs/prismadb";
 
 type GetFavoritesParams = {
-  userId?: string
-}
+  userId?: string;
+};
 export async function getFavourites({ userId }: GetFavoritesParams) {
   const user = await prisma.user.findUnique({
     where: {
       id: userId,
     },
-  })
+  });
 
-  if (!user) return null
+  if (!user) return null;
 
   try {
     const favouriteListings = await prisma.listing.findMany({
@@ -22,11 +22,11 @@ export async function getFavourites({ userId }: GetFavoritesParams) {
       orderBy: {
         createdAt: "desc",
       },
-    })
+    });
 
-    return favouriteListings
+    return favouriteListings;
   } catch (error: any) {
-    console.log(error)
-    return null
+    console.log(error);
+    return null;
   }
 }

@@ -1,3 +1,1 @@
-const INITIAL_STATE = {
-
-}
+const INITIAL_STATE = {};

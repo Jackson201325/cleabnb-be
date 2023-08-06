@@ -1,18 +1,18 @@
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form"
-import { BiDollar } from "react-icons/bi"
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { BiDollar } from "react-icons/bi";
 
-type InputType = "text" | "email" | "password" | "number"
+type InputType = "text" | "email" | "password" | "number";
 
 type Props = {
-  id: string
-  disabled?: boolean
-  errors: FieldErrors
-  formatPrice?: boolean
-  label: string
-  register: UseFormRegister<FieldValues>
-  required?: boolean
-  type?: InputType
-}
+  id: string;
+  disabled?: boolean;
+  errors: FieldErrors;
+  formatPrice?: boolean;
+  label: string;
+  register: UseFormRegister<FieldValues>;
+  required?: boolean;
+  type?: InputType;
+};
 
 const Input = ({
   id,
@@ -61,7 +61,7 @@ const Input = ({
         {label}
       </label>
     </div>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

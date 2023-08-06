@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import Button from "@/app/components/Button"
-import Calendar from "@/app/components/inputs/Calendar"
-import { FC } from "react"
-import { Range, RangeKeyDict } from "react-date-range"
+import Button from "@/app/components/Button";
+import Calendar from "@/app/components/inputs/Calendar";
+import { FC } from "react";
+import { Range, RangeKeyDict } from "react-date-range";
 
 type Props = {
-  dateRange: Range
-  disabled?: boolean
-  disabledDates: Date[]
-  onChangeDate: (value: Range) => void
-  onSubmit: () => void
-  price: number
-  totalPrice: number
-}
+  dateRange: Range;
+  disabled?: boolean;
+  disabledDates: Date[];
+  onChangeDate: (value: Range) => void;
+  onSubmit: () => void;
+  price: number;
+  totalPrice: number;
+};
 
 const ListingReservation: FC<Props> = ({
   price,
@@ -28,7 +28,7 @@ const ListingReservation: FC<Props> = ({
     value: dateRange,
     disabledDates,
     onChange: (value: RangeKeyDict) => onChangeDate(value.selection),
-  }
+  };
 
   return (
     <div className="bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden">
@@ -47,7 +47,7 @@ const ListingReservation: FC<Props> = ({
         <div>$ {totalPrice}</div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ListingReservation
+export default ListingReservation;

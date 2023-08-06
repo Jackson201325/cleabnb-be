@@ -1,44 +1,44 @@
-import useCountries from "@/app/hooks/useCountries"
-import useFilterModal from "@/app/hooks/useFilterModal"
-import { differenceInDays } from "date-fns"
-import { useSearchParams } from "next/navigation"
-import { useMemo } from "react"
-import { BiSearch } from "react-icons/bi"
+import useCountries from "@/app/hooks/useCountries";
+import useFilterModal from "@/app/hooks/useFilterModal";
+import { differenceInDays } from "date-fns";
+import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
+import { BiSearch } from "react-icons/bi";
 
 function Search() {
-  const { open } = useFilterModal()
-  const params = useSearchParams()
-  const { getByValue } = useCountries()
+  const { open } = useFilterModal();
+  const params = useSearchParams();
+  const { getByValue } = useCountries();
 
-  const locationValue = params?.get("location")
-  const startDateValue = params?.get("startDate")
-  const endDateValue = params?.get("endDate")
-  const guestCountValue = params?.get("guestCount")
+  const locationValue = params?.get("location");
+  const startDateValue = params?.get("startDate");
+  const endDateValue = params?.get("endDate");
+  const guestCountValue = params?.get("guestCount");
 
   const locationLabel = useMemo(() => {
-    if (locationValue) return getByValue(locationValue)?.label
+    if (locationValue) return getByValue(locationValue)?.label;
 
-    return "Anywhere"
-  }, [locationValue, getByValue])
+    return "Anywhere";
+  }, [locationValue, getByValue]);
 
   const durationLabel = useMemo(() => {
     if (startDateValue && endDateValue) {
-      const start = new Date(startDateValue as string)
-      const end = new Date(endDateValue as string)
-      let diff = differenceInDays(end, start)
+      const start = new Date(startDateValue as string);
+      const end = new Date(endDateValue as string);
+      let diff = differenceInDays(end, start);
 
-      if (diff === 0) diff = 1
+      if (diff === 0) diff = 1;
 
-      return `${diff} days`
+      return `${diff} days`;
     }
-    return "Any Week"
-  }, [startDateValue, endDateValue])
+    return "Any Week";
+  }, [startDateValue, endDateValue]);
 
   const guestCountLabel = useMemo(() => {
-    if (guestCountValue) return `${guestCountValue} guests`
+    if (guestCountValue) return `${guestCountValue} guests`;
 
-    return "Add Guest"
-  }, [guestCountValue])
+    return "Add Guest";
+  }, [guestCountValue]);
 
   return (
     <div
@@ -58,7 +58,7 @@ function Search() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Search
+export default Search;

@@ -45,7 +45,7 @@ const Register = () => {
           setIsLoading(false);
         });
     },
-    [registerModal, loginModal],
+    [registerModal, loginModal]
   );
 
   const bodyContent = (

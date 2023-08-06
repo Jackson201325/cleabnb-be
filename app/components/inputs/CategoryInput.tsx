@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { IconType } from "react-icons"
+import { IconType } from "react-icons";
 
 type Props = {
-  icon: IconType
-  label: string
-  onClick: (value: string) => void
-  selected: boolean
-}
+  icon: IconType;
+  label: string;
+  onClick: (value: string) => void;
+  selected: boolean;
+};
 
 const CategoryInput = ({ icon: Icon, label, onClick, selected }: Props) => {
   return (
@@ -29,7 +29,7 @@ const CategoryInput = ({ icon: Icon, label, onClick, selected }: Props) => {
       <Icon size={30} />
       <div className="font-semibold">{label}</div>
     </div>
-  )
-}
+  );
+};
 
-export default CategoryInput
+export default CategoryInput;

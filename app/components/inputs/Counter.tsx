@@ -1,22 +1,22 @@
-import { FC, useCallback } from "react"
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
+import { FC, useCallback } from "react";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 type Props = {
-  title?: string
-  subtitle?: string
-  value?: number
-  onChange?: (value: number) => void
-}
+  title?: string;
+  subtitle?: string;
+  value?: number;
+  onChange?: (value: number) => void;
+};
 
 const Counter: FC<Props> = ({ title, subtitle, value, onChange }) => {
   const onAdd = useCallback(() => {
-    onChange && value && onChange(value + 1)
-  }, [value, onChange])
+    onChange && value && onChange(value + 1);
+  }, [value, onChange]);
 
   const onReduce = useCallback(() => {
-    if (value === 1) return
-    onChange && value && onChange(value - 1)
-  }, [value, onChange])
+    if (value === 1) return;
+    onChange && value && onChange(value - 1);
+  }, [value, onChange]);
 
   return (
     <div className="flex flex-row items-center justify-between">
@@ -66,7 +66,7 @@ const Counter: FC<Props> = ({ title, subtitle, value, onChange }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Counter
+export default Counter;

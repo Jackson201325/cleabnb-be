@@ -1,46 +1,46 @@
 // Because of the useState
-"use client"
+"use client";
 
-import Container from "@/app/components/Container"
-import { Listing, Reservation, User } from "@prisma/client"
+import Container from "@/app/components/Container";
+import { Listing, Reservation, User } from "@prisma/client";
 
-import axios from "axios"
-import { useRouter } from "next/navigation"
-import { useCallback, useState } from "react"
-import toast from "react-hot-toast"
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
+import toast from "react-hot-toast";
 
-import Heading from "../components/Heading"
-import ListingCard from "../components/modals/listings/ListingCard"
+import Heading from "../components/Heading";
+import ListingCard from "../components/modals/listings/ListingCard";
 
 type Props = {
-  reservations: (Reservation & { listing: Listing })[]
-  currentUser: User
-}
+  reservations: (Reservation & { listing: Listing })[];
+  currentUser: User;
+};
 
 const TripsClient = ({ reservations, currentUser }: Props) => {
-  const router = useRouter()
-  const [deletingId, setDeletingId] = useState("")
+  const router = useRouter();
+  const [deletingId, setDeletingId] = useState("");
 
   const onCancel = useCallback(
     (id: string) => {
-      setDeletingId(id)
+      setDeletingId(id);
 
       axios
         .delete(`/api/reservations/${id}`)
         .then(() => {
-          toast.success("Reservation cancelled")
-          router.refresh()
+          toast.success("Reservation cancelled");
+          router.refresh();
         })
         .catch((error) => {
-          console.error(error)
-          toast.error("Error cancelling reservation")
+          console.error(error);
+          toast.error("Error cancelling reservation");
         })
         .finally(() => {
-          setDeletingId("")
-        })
+          setDeletingId("");
+        });
     },
-    [router],
-  )
+    [router]
+  );
 
   return (
     <Container>
@@ -63,7 +63,7 @@ const TripsClient = ({ reservations, currentUser }: Props) => {
         ))}
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default TripsClient
+export default TripsClient;

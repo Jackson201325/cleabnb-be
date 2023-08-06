@@ -1,11 +1,11 @@
-import Image from "next/image"
+import Image from "next/image";
 
 type AvatarProps = {
-  src?: string | null | undefined
-}
+  src?: string | null | undefined;
+};
 
 const Avatar: React.FC<AvatarProps> = ({ src }) => {
-  const img = src || "/images/avatar.jpg"
+  const img = src || "/images/avatar.jpg";
 
   return (
     <Image
@@ -15,7 +15,7 @@ const Avatar: React.FC<AvatarProps> = ({ src }) => {
       alt="avatar"
       src={img}
     />
-  )
-}
+  );
+};
 
-export default Avatar
+export default Avatar;

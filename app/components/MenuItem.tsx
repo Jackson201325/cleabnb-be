@@ -1,9 +1,9 @@
-import type { NextPage } from "next"
+import type { NextPage } from "next";
 
 type Props = {
-  onClick: () => void
-  label: string
-}
+  onClick: () => void;
+  label: string;
+};
 const MenuItem: NextPage<Props> = ({ onClick, label }) => {
   return (
     <div
@@ -12,7 +12,7 @@ const MenuItem: NextPage<Props> = ({ onClick, label }) => {
     >
       {label}
     </div>
-  )
-}
+  );
+};
 
-export default MenuItem
+export default MenuItem;

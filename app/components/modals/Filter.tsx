@@ -45,7 +45,7 @@ const Filter = () => {
   const Map = useMemo(
     () => dynamic(() => import("../Map"), { ssr: false }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [location],
+    [location]
   );
 
   const onBack = useCallback(() => {
@@ -88,7 +88,7 @@ const Filter = () => {
         url: "/",
         query: updatedParams,
       },
-      { skipNull: true },
+      { skipNull: true }
     );
 
     setStep(STEPS.LOCATION);

@@ -40,7 +40,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
         url: "/",
         query: updatedQuery,
       },
-      { skipNull: true, skipEmptyString: true },
+      { skipNull: true, skipEmptyString: true }
     );
 
     router.push(url);
@@ -52,6 +52,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
       className={`
         flex
         flex-col
+        flex-grow
         items-center
         justify-center
         gap-2

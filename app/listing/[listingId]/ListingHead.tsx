@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import Heading from "@/app/components/Heading"
-import HeartButton from "@/app/components/HeartButton"
+import Heading from "@/app/components/Heading";
+import HeartButton from "@/app/components/HeartButton";
 
-import useCountries from "@/app/hooks/useCountries"
-import { User } from "@prisma/client"
+import useCountries from "@/app/hooks/useCountries";
+import { User } from "@prisma/client";
 
-import Image from "next/image"
+import Image from "next/image";
 
 export type ListingHeadProps = {
-  title: string
-  imageSrc: string
-  locationValue: string
-  currentUser: User | null
-  id: string
-}
+  title: string;
+  imageSrc: string;
+  locationValue: string;
+  currentUser: User | null;
+  id: string;
+};
 
 const ListingHead = ({
   title,
@@ -23,9 +23,9 @@ const ListingHead = ({
   currentUser,
   id,
 }: ListingHeadProps) => {
-  const { getByValue } = useCountries()
+  const { getByValue } = useCountries();
 
-  const location = getByValue(locationValue)
+  const location = getByValue(locationValue);
   return (
     <>
       <Heading
@@ -44,7 +44,7 @@ const ListingHead = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ListingHead
+export default ListingHead;

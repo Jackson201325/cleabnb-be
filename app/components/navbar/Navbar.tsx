@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { User } from "@prisma/client"
+import { User } from "@prisma/client";
 
-import { FC } from "react"
+import { FC } from "react";
 
-import Container from "../Container"
-import Categories from "./Categories"
-import Logo from "./Logo"
-import Search from "./Search"
-import UserMenu from "./UserMenu"
+import Container from "../Container";
+import Categories from "./Categories";
+import Logo from "./Logo";
+import Search from "./Search";
+import UserMenu from "./UserMenu";
 
 type NavBarProps = {
-  currentUser?: User | null
-}
+  currentUser?: User | null;
+};
 
 export const NavBar: FC<NavBarProps> = ({ currentUser }) => {
   return (
@@ -28,7 +28,7 @@ export const NavBar: FC<NavBarProps> = ({ currentUser }) => {
       </div>
       <Categories />
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

@@ -1,15 +1,15 @@
-import Container from "@/app/components/Container"
-import { Listing, User } from "@prisma/client"
+import Container from "@/app/components/Container";
+import { Listing, User } from "@prisma/client";
 
-import { FC } from "react"
+import { FC } from "react";
 
-import Heading from "../components/Heading"
-import ListingCard from "../components/modals/listings/ListingCard"
+import Heading from "../components/Heading";
+import ListingCard from "../components/modals/listings/ListingCard";
 
 type Props = {
-  favouriteListings: Listing[]
-  currentUser: User
-}
+  favouriteListings: Listing[];
+  currentUser: User;
+};
 
 const FavouritesClient: FC<Props> = ({ favouriteListings, currentUser }) => {
   return (
@@ -29,7 +29,7 @@ const FavouritesClient: FC<Props> = ({ favouriteListings, currentUser }) => {
         ))}
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default FavouritesClient
+export default FavouritesClient;

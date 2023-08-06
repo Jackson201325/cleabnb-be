@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import useRentModal from "@/app/hooks/useRentModal"
+import useRentModal from "@/app/hooks/useRentModal";
 
-import axios from "axios"
-import { useRouter } from "next/navigation"
-import { FC, useMemo, useState } from "react"
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
-import toast from "react-hot-toast"
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { FC, useMemo, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
-import StepsBody from "../StepsBody"
-import { CountrySelectValue } from "../inputs/CountrySelect"
-import Modal from "./Modal"
+import StepsBody from "../StepsBody";
+import { CountrySelectValue } from "../inputs/CountrySelect";
+import Modal from "./Modal";
 
 export enum STEPS {
   CATEGORY = 0,
@@ -21,13 +21,13 @@ export enum STEPS {
   PRICE = 5,
 }
 
-type Props = {}
+type Props = {};
 
 const Rent: FC<Props> = () => {
-  const rentModal = useRentModal()
-  const router = useRouter()
-  const [step, setStep] = useState(STEPS.CATEGORY)
-  const [isLoading, setIsLoading] = useState(false)
+  const rentModal = useRentModal();
+  const router = useRouter();
+  const [step, setStep] = useState(STEPS.CATEGORY);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -46,63 +46,63 @@ const Rent: FC<Props> = () => {
       title: "",
       description: "",
     },
-  })
-  const category: string = watch("category")
-  const location: CountrySelectValue = watch("location")
-  const guestCount: number = watch("guestCount")
-  const roomCount: number = watch("roomCount")
-  const bathroomCount: number = watch("bathroomCount")
-  const imageSrc: string = watch("imageSrc")
+  });
+  const category: string = watch("category");
+  const location: CountrySelectValue = watch("location");
+  const guestCount: number = watch("guestCount");
+  const roomCount: number = watch("roomCount");
+  const bathroomCount: number = watch("bathroomCount");
+  const imageSrc: string = watch("imageSrc");
 
   const onBack = () => {
-    setStep((value) => value - 1)
-  }
+    setStep((value) => value - 1);
+  };
 
   const onNext = () => {
-    setStep((value) => value + 1)
-  }
+    setStep((value) => value + 1);
+  };
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
-    })
-  }
+    });
+  };
 
   const actionLabel = useMemo(() => {
-    if (step === STEPS.PRICE) return "Create"
+    if (step === STEPS.PRICE) return "Create";
 
-    return "Next"
-  }, [step])
+    return "Next";
+  }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
-    if (step === STEPS.CATEGORY) return undefined
+    if (step === STEPS.CATEGORY) return undefined;
 
-    return "Back"
-  }, [step])
+    return "Back";
+  }, [step]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    if (step !== STEPS.PRICE) return onNext()
+    if (step !== STEPS.PRICE) return onNext();
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     axios
       .post("/api/listing", data)
       .then(() => {
-        toast.success("Listing Created!")
-        router.refresh()
-        reset()
-        setStep(STEPS.CATEGORY)
-        rentModal.close()
+        toast.success("Listing Created!");
+        router.refresh();
+        reset();
+        setStep(STEPS.CATEGORY);
+        rentModal.close();
       })
       .catch(() => {
-        toast.error("Something went wrong!")
+        toast.error("Something went wrong!");
       })
       .finally(() => {
-        setIsLoading(false)
-      })
-  }
+        setIsLoading(false);
+      });
+  };
 
   let bodyContent = (
     <StepsBody
@@ -118,7 +118,7 @@ const Rent: FC<Props> = () => {
       errors={errors}
       location={location}
     />
-  )
+  );
 
   return (
     <Modal
@@ -131,7 +131,7 @@ const Rent: FC<Props> = () => {
       onSubmit={handleSubmit(onSubmit)}
       title="Aribnb Your home !"
     />
-  )
-}
+  );
+};
 
-export default Rent
+export default Rent;

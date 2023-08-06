@@ -1,22 +1,22 @@
-import prisma from "@/app/libs/prismadb"
+import prisma from "@/app/libs/prismadb";
 
 export type ReservationParams = {
-  userId?: string
-  authorId?: string
-  listingId?: string
-}
+  userId?: string;
+  authorId?: string;
+  listingId?: string;
+};
 
 export async function getReservations(params: ReservationParams) {
   try {
-    const { listingId, userId, authorId } = params
+    const { listingId, userId, authorId } = params;
 
-    let query: any = {}
+    let query: any = {};
 
-    if (listingId) query.listingId = listingId
+    if (listingId) query.listingId = listingId;
 
-    if (userId) query.userId = userId
+    if (userId) query.userId = userId;
 
-    if (authorId) query.listing = { userId: authorId }
+    if (authorId) query.listing = { userId: authorId };
 
     const reservations = await prisma.reservation.findMany({
       where: query,
@@ -26,11 +26,11 @@ export async function getReservations(params: ReservationParams) {
       orderBy: {
         createdAt: "desc",
       },
-    })
+    });
 
-    return reservations
+    return reservations;
   } catch (error: any) {
-    console.log(error)
-    return null
+    console.log(error);
+    return null;
   }
 }

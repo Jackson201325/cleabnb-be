@@ -1,9 +1,9 @@
-import prisma from "@/app/libs/prismadb"
-import { ListingParams } from "../api/favourites/[listingId]/route"
+import prisma from "@/app/libs/prismadb";
+import { ListingParams } from "../api/favourites/[listingId]/route";
 
 export async function getListingById(params: ListingParams) {
   try {
-    const { listingId } = params
+    const { listingId } = params;
 
     const listing = await prisma.listing.findUnique({
       where: {
@@ -12,13 +12,13 @@ export async function getListingById(params: ListingParams) {
       include: {
         user: true,
       },
-    })
+    });
 
-    if (!listing) return null
+    if (!listing) return null;
 
-    return listing
+    return listing;
   } catch (error) {
-    console.log(error)
-    throw new Error("Something went wrong")
+    console.log(error);
+    throw new Error("Something went wrong");
   }
 }

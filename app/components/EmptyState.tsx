@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { FC } from "react"
+import { useRouter } from "next/navigation";
+import { FC } from "react";
 
-import Button from "./Button"
-import Heading from "./Heading"
+import Button from "./Button";
+import Heading from "./Heading";
 
 type Props = {
-  title?: string
-  subtitle?: string
-  showReset?: boolean
-}
+  title?: string;
+  subtitle?: string;
+  showReset?: boolean;
+};
 
 const EmptyState: FC<Props> = ({
   title = "No exact matches",
   subtitle = "Try ghanging or removing some of your filters",
   showReset,
 }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <div className="h-[60vh] flex flex-col gap-2 justify-center items-center">
@@ -32,7 +32,7 @@ const EmptyState: FC<Props> = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EmptyState
+export default EmptyState;

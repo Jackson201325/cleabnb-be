@@ -1,13 +1,13 @@
-import { IconType } from "react-icons"
+import { IconType } from "react-icons";
 
 type Props = {
-  disabled?: boolean
-  icon?: IconType
-  label?: string
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
-  outline?: boolean
-  small?: boolean
-}
+  disabled?: boolean;
+  icon?: IconType;
+  label?: string;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  outline?: boolean;
+  small?: boolean;
+};
 
 const Button: React.FC<Props> = ({
   disabled = false,
@@ -34,7 +34,7 @@ const Button: React.FC<Props> = ({
       {Icon ? <Icon size={18} className="absolute left-4 top-3" /> : null}
       {label}
     </button>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

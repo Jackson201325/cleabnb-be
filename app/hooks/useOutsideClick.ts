@@ -3,7 +3,7 @@ import { MutableRefObject, useEffect } from "react";
 function useOutsideClick(
   currentRef: MutableRefObject<HTMLElement | null>,
   callbackFunc: () => void,
-  isOpen: boolean | undefined,
+  isOpen: boolean | undefined
 ) {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

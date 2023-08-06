@@ -1,29 +1,29 @@
-import dynamic from "next/dynamic"
-import { useMemo } from "react"
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form"
+import dynamic from "next/dynamic";
+import { useMemo } from "react";
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
-import Heading from "./Heading"
-import CategoryInput from "./inputs/CategoryInput"
-import Counter from "./inputs/Counter"
-import CountrySelect, { CountrySelectValue } from "./inputs/CountrySelect"
-import ImageUpload from "./inputs/ImageUpload"
-import Input from "./inputs/Input"
-import { STEPS } from "./modals/Rent"
-import { categories } from "./navbar/Categories"
+import Heading from "./Heading";
+import CategoryInput from "./inputs/CategoryInput";
+import Counter from "./inputs/Counter";
+import CountrySelect, { CountrySelectValue } from "./inputs/CountrySelect";
+import ImageUpload from "./inputs/ImageUpload";
+import Input from "./inputs/Input";
+import { STEPS } from "./modals/Rent";
+import { categories } from "./navbar/Categories";
 
 type Props = {
-  step: number
-  guestCount: number
-  category: string
-  roomCount: number
-  bathroomCount: number
-  setCustomValue: (field: string, value: unknown) => void
-  imageSrc: string
-  isLoading: boolean
-  register: UseFormRegister<FieldValues>
-  errors: FieldErrors<FieldValues>
-  location: CountrySelectValue
-}
+  step: number;
+  guestCount: number;
+  category: string;
+  roomCount: number;
+  bathroomCount: number;
+  setCustomValue: (field: string, value: unknown) => void;
+  imageSrc: string;
+  isLoading: boolean;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
+  location: CountrySelectValue;
+};
 
 const StepsBody = ({
   step,
@@ -41,8 +41,8 @@ const StepsBody = ({
   const Map = useMemo(
     () => dynamic(() => import("./Map"), { ssr: false }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [location],
-  )
+    [location]
+  );
 
   if (step === STEPS.CATEGORY) {
     return (
@@ -64,7 +64,7 @@ const StepsBody = ({
           ))}
         </div>
       </div>
-    )
+    );
   }
 
   if (step === STEPS.LOCATION) {
@@ -80,7 +80,7 @@ const StepsBody = ({
         />
         <Map center={location?.latlng} />
       </div>
-    )
+    );
   }
 
   if (step === STEPS.INFO) {
@@ -111,7 +111,7 @@ const StepsBody = ({
           onChange={(value) => setCustomValue("bathroomCount", value)}
         />
       </div>
-    )
+    );
   }
 
   if (step === STEPS.IMAGES) {
@@ -126,7 +126,7 @@ const StepsBody = ({
           onChange={(value) => setCustomValue("imageSrc", value)}
         />
       </div>
-    )
+    );
   }
 
   if (step === STEPS.DESCRIPTION) {
@@ -154,7 +154,7 @@ const StepsBody = ({
           required
         />
       </div>
-    )
+    );
   }
 
   if (step === STEPS.PRICE) {
@@ -175,8 +175,8 @@ const StepsBody = ({
           formatPrice
         />
       </div>
-    )
+    );
   }
-}
+};
 
-export default StepsBody
+export default StepsBody;

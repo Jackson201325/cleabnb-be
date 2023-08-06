@@ -1,26 +1,26 @@
 // Because of the useRouter
-"use client"
+"use client";
 
-import useCountries from "@/app/hooks/useCountries"
-import { Listing, Reservation, User } from "@prisma/client"
+import useCountries from "@/app/hooks/useCountries";
+import { Listing, Reservation, User } from "@prisma/client";
 
-import { format } from "date-fns"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
-import React, { useCallback, useMemo } from "react"
+import { format } from "date-fns";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React, { useCallback, useMemo } from "react";
 
-import Button from "../../Button"
-import HeartButton from "../../HeartButton"
+import Button from "../../Button";
+import HeartButton from "../../HeartButton";
 
 type Props = {
-  listing: Listing
-  reservation?: Reservation
-  onAction?: (id: string) => void
-  disabled?: boolean
-  actionLabel?: string
-  actionId?: string
-  currentUser: User | null
-}
+  listing: Listing;
+  reservation?: Reservation;
+  onAction?: (id: string) => void;
+  disabled?: boolean;
+  actionLabel?: string;
+  actionId?: string;
+  currentUser: User | null;
+};
 
 const ListingCard = ({
   listing,
@@ -31,39 +31,39 @@ const ListingCard = ({
   actionId = "",
   currentUser,
 }: Props) => {
-  const router = useRouter()
-  const { getByValue } = useCountries()
-  const location = getByValue(listing.locationValue)
+  const router = useRouter();
+  const { getByValue } = useCountries();
+  const location = getByValue(listing.locationValue);
 
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.stopPropagation()
+      e.stopPropagation();
       if (disabled) {
-        return
+        return;
       }
-      onAction?.(actionId)
+      onAction?.(actionId);
     },
-    [onAction, actionId, disabled],
-  )
+    [onAction, actionId, disabled]
+  );
 
   const price = useMemo(() => {
     if (reservation) {
-      return reservation.totalPrice
+      return reservation.totalPrice;
     }
 
-    return listing.price
-  }, [reservation, listing.price])
+    return listing.price;
+  }, [reservation, listing.price]);
 
   const reservationDate = useMemo(() => {
     if (!reservation) {
-      return null
+      return null;
     }
 
-    const startDate = new Date(reservation.startDate)
-    const endDate = new Date(reservation.endDate)
+    const startDate = new Date(reservation.startDate);
+    const endDate = new Date(reservation.endDate);
 
-    return `${format(startDate, "PP")} - ${format(endDate, "PP")}`
-  }, [reservation])
+    return `${format(startDate, "PP")} - ${format(endDate, "PP")}`;
+  }, [reservation]);
 
   return (
     <div
@@ -102,7 +102,7 @@ const ListingCard = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ListingCard
+export default ListingCard;

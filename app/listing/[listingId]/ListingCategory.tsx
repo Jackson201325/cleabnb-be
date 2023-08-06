@@ -1,6 +1,6 @@
-import { Category } from "@/app/components/navbar/Categories"
+import { Category } from "@/app/components/navbar/Categories";
 
-import { FC } from "react"
+import { FC } from "react";
 
 const ListingCategory: FC<Category> = ({ icon: Icon, label, description }) => {
   return (
@@ -13,7 +13,7 @@ const ListingCategory: FC<Category> = ({ icon: Icon, label, description }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ListingCategory
+export default ListingCategory;
