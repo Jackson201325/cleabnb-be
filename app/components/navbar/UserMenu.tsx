@@ -51,6 +51,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     toggleOpen();
   }, [toggleOpen, registerModal]);
 
+  const handleClick = (url: string) => {
+    router.push(url);
+    setIsOpen(false);
+  };
+
   return (
     <div className="relative" ref={dropdownRef}>
       <div className="flex flex-row items-center gap-3">
@@ -76,19 +81,23 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             {currentUser ? (
               <>
                 <MenuItem
-                  onClick={() => router.push("/trips")}
+                  onClick={() => handleClick("/")}
+                  label="Listings"
+                />
+                <MenuItem
+                  onClick={() => handleClick("/trips")}
                   label="My trips"
                 />
                 <MenuItem
-                  onClick={() => router.push("/favourites")}
+                  onClick={() => handleClick("/favourites")}
                   label="My favorites"
                 />
                 <MenuItem
-                  onClick={() => router.push("/reservations")}
+                  onClick={() => handleClick("/reservations")}
                   label="My Reservtions"
                 />
                 <MenuItem
-                  onClick={() => router.push("/properties")}
+                  onClick={() => handleClick("/properties")}
                   label="My properties"
                 />
                 <MenuItem onClick={handleRent} label="Airbnb Home" />
