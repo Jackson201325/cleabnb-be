@@ -7,22 +7,22 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 type Props = {
-  value: Range;
   disabledDates?: Date[];
   onChange: (value: RangeKeyDict) => void;
+  value: Range;
 };
 
 const Calendar: FC<Props> = ({ value, disabledDates, onChange }) => {
   return (
     <DateRange
+      date={new Date()}
+      direction="vertical"
+      disabledDates={disabledDates}
+      minDate={new Date()}
+      onChange={onChange}
       rangeColors={["#262626"]}
       ranges={[value]}
-      date={new Date()}
-      onChange={onChange}
-      direction="vertical"
       showDateDisplay={false}
-      minDate={new Date()}
-      disabledDates={disabledDates}
     />
   );
 };

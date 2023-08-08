@@ -81,10 +81,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             {currentUser ? (
               <>
                 <MenuItem
-                  onClick={() => handleClick("/")}
-                  label="Listings"
-                />
-                <MenuItem
                   onClick={() => handleClick("/trips")}
                   label="My trips"
                 />
@@ -110,6 +106,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <MenuItem onClick={handleRegisterModal} label="Register" />
               </>
             )}
+            <MenuItem onClick={() => handleClick("/")} label="Listings" />
           </div>
         </div>
       )}
